@@ -1,5 +1,5 @@
 #define NanoAODBase_cxx
-#include "NanoAODBase.h"
+#include "PhysicsTools/DijetSkimmer/interface/NanoAODBase.h"
 
 void NanoAODBase::Loop()
 {

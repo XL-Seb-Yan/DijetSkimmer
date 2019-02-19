@@ -10,8 +10,6 @@ keep nPhoton
 keep Photon*
 keep nJet
 keep Jet*
-keep nGenJet
-keep GenJet*
 keep nTrigObj
 keep nTrigObj*
 keep *MET*
@@ -33,3 +31,16 @@ keep HLT_IsoTkMu*
 keep HLT_Mu*
 keep HLT_TkMu*
 keep HLT_OldMu*
+
+keep nGenJet
+keep GenJet*
+keep Generator*
+keep genWeight
+keep nPSWeight
+keep PSWeight
+keep GenMET*
+keep Pileup*
+keep nGenDressedLepton
+keep GenDressedLepton*
+
+

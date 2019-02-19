@@ -1,10 +1,10 @@
-#define NanoAOD_16_cxx
+#define NanoAOD_16_data_cxx
 #include "PhysicsTools/DijetSkimmer/interface/NanoAODBase_16_data.h"
 #include <TH2.h>
 #include <TStyle.h>
 #include <TCanvas.h>
 
-void NanoAOD_16::Loop()
+void NanoAOD_16_data::Loop()
 {
 //   In a ROOT session, you can do:
 //      root> .L NanoAOD_16.C

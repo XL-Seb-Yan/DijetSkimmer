@@ -928,31 +928,6 @@ public :
    Bool_t          HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ_L1JetTauSeeded;
    Bool_t          HLTriggerFinalPath;
    Bool_t          L1Reco_step;
-   Bool_t          Flag_HBHENoiseFilter;
-   Bool_t          Flag_HBHENoiseIsoFilter;
-   Bool_t          Flag_CSCTightHaloFilter;
-   Bool_t          Flag_CSCTightHaloTrkMuUnvetoFilter;
-   Bool_t          Flag_CSCTightHalo2015Filter;
-   Bool_t          Flag_globalTightHalo2016Filter;
-   Bool_t          Flag_globalSuperTightHalo2016Filter;
-   Bool_t          Flag_HcalStripHaloFilter;
-   Bool_t          Flag_hcalLaserEventFilter;
-   Bool_t          Flag_EcalDeadCellTriggerPrimitiveFilter;
-   Bool_t          Flag_EcalDeadCellBoundaryEnergyFilter;
-   Bool_t          Flag_goodVertices;
-   Bool_t          Flag_eeBadScFilter;
-   Bool_t          Flag_ecalLaserCorrFilter;
-   Bool_t          Flag_trkPOGFilters;
-   Bool_t          Flag_chargedHadronTrackResolutionFilter;
-   Bool_t          Flag_muonBadTrackFilter;
-   Bool_t          Flag_BadChargedCandidateFilter;
-   Bool_t          Flag_BadPFMuonFilter;
-   Bool_t          Flag_BadChargedCandidateSummer16Filter;
-   Bool_t          Flag_BadPFMuonSummer16Filter;
-   Bool_t          Flag_trkPOG_manystripclus53X;
-   Bool_t          Flag_trkPOG_toomanystripclus53X;
-   Bool_t          Flag_trkPOG_logErrorTooManyClusters;
-   Bool_t          Flag_METFilters;
    Bool_t          HLT_BTagMu_DiJet170_Mu5;
    Bool_t          HLT_BTagMu_AK8Jet300_Mu5;
    Bool_t          HLT_L1FatEvents_part0;
@@ -1870,31 +1845,6 @@ public :
    TBranch        *b_HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ_L1JetTauSeeded;   //!
    TBranch        *b_HLTriggerFinalPath;   //!
    TBranch        *b_L1Reco_step;   //!
-   TBranch        *b_Flag_HBHENoiseFilter;   //!
-   TBranch        *b_Flag_HBHENoiseIsoFilter;   //!
-   TBranch        *b_Flag_CSCTightHaloFilter;   //!
-   TBranch        *b_Flag_CSCTightHaloTrkMuUnvetoFilter;   //!
-   TBranch        *b_Flag_CSCTightHalo2015Filter;   //!
-   TBranch        *b_Flag_globalTightHalo2016Filter;   //!
-   TBranch        *b_Flag_globalSuperTightHalo2016Filter;   //!
-   TBranch        *b_Flag_HcalStripHaloFilter;   //!
-   TBranch        *b_Flag_hcalLaserEventFilter;   //!
-   TBranch        *b_Flag_EcalDeadCellTriggerPrimitiveFilter;   //!
-   TBranch        *b_Flag_EcalDeadCellBoundaryEnergyFilter;   //!
-   TBranch        *b_Flag_goodVertices;   //!
-   TBranch        *b_Flag_eeBadScFilter;   //!
-   TBranch        *b_Flag_ecalLaserCorrFilter;   //!
-   TBranch        *b_Flag_trkPOGFilters;   //!
-   TBranch        *b_Flag_chargedHadronTrackResolutionFilter;   //!
-   TBranch        *b_Flag_muonBadTrackFilter;   //!
-   TBranch        *b_Flag_BadChargedCandidateFilter;   //!
-   TBranch        *b_Flag_BadPFMuonFilter;   //!
-   TBranch        *b_Flag_BadChargedCandidateSummer16Filter;   //!
-   TBranch        *b_Flag_BadPFMuonSummer16Filter;   //!
-   TBranch        *b_Flag_trkPOG_manystripclus53X;   //!
-   TBranch        *b_Flag_trkPOG_toomanystripclus53X;   //!
-   TBranch        *b_Flag_trkPOG_logErrorTooManyClusters;   //!
-   TBranch        *b_Flag_METFilters;   //!
    TBranch        *b_HLT_BTagMu_DiJet170_Mu5;   //!
    TBranch        *b_HLT_BTagMu_AK8Jet300_Mu5;   //!
    TBranch        *b_HLT_L1FatEvents_part0;   //!

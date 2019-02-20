@@ -1,32 +1,14 @@
+import os
 import ROOT
 ROOT.PyConfig.IgnoreCommandLineOptions = True
 
 from PhysicsTools.NanoAODTools.postprocessing.framework.datamodel import Collection,Object
 from PhysicsTools.NanoAODTools.postprocessing.framework.module import Module
 from PhysicsTools.NanoAODTools.postprocessing.tools import *
-from PhysicsTools.NanoAODTools.postprocessing.modules.jme.jetmetUncertainties import *
-from PhysicsTools.NanoAODTools.postprocessing.modules.jme.jetSmearer import jetSmearer
-
-import copy
+from PhysicsTools.NanoAODTools.postprocessing.framework.enums import *
 
 ROOT.gInterpreter.Declare("#include \"PhysicsTools/DijetSkimmer/interface/NanoAODBase.h\"")
 ROOT.gSystem.Load(os.path.expandvars("$CMSSW_BASE/lib/$SCRAM_ARCH/libPhysicsToolsDijetSkimmer.so"))
-
-
-from enum import Enum
-class Year(Enum):
-	k2016 = 1
-	k2017 = 2
-	k2018 = 3
-
-class Source(Enum):
-	kMC = 1
-	kDATA = 2
-
-class Dataset(Enum):
-	kJetHT = 1
-	kSingleMuon = 2
-	kNone = 3
 
 class DijetSkimmer(Module):
 	def __init__(self, year=Year.k2016, source=Source.kDATA, dataset=Dataset.kNone, hist_file=None):
@@ -63,33 +45,14 @@ class DijetSkimmer(Module):
  				for i, trigger in enumerate(self._trigger_list):
  					self._histograms["TriggerPass"].GetXaxis().SetBinLabel(i+1, trigger)
 
-		# Configure JES and JER
-		self._jes_uncs = []
-		self._gt = ""
-		self._jet_smearer = None
-		if self._source == Source.kMC:
-			if self._year == Year.k2016: 
-				self._jes_uncs = jesUncertaintySources2016
-				self._gt = "Summer16_23Sep2016V4_MC"
-
-			elif self._year == Year.k2017:
-				self._jes_uncs = jesUncertaintySources2017
-				self._gt =  "Fall17_17Nov2017_V8_MC"
-
-			elif self._year == Year.k2018:
-				self._jes_uncs = jesUncertaintySources2018
-				self._gt =  "Autumn18_V2_MC"
-
-			self._jet_smearer = jetSmearer(self._gt, "AK4PFCHS", "Summer16_25nsV1_MC_PtResolution_AK8PFPuppi.txt", "Summer16_25nsV1_MC_SF_AK8PFPuppi.txt")
-			self._jet_smearer.beginJob()
 
 		elif self._source == Source.kDATA:
 			# JECs are already applied to NanoAOD, so nothing to do
 			pass
 
 	def endJob(self):
-		if self._source == Source.kMC:
-			self._jet_smearer.endJob()
+		for hist_name in ["ProcessedEvents", "TriggeredEvents", "NJets", "SelectedEvents"]:
+			print "[DijetSkimmer::endJob] INFO : {} = {}".format(hist_name, self._histograms[hist_name].Integral())
 	
 	def beginFile(self, inputFile, outputFile, inputTree, wrappedOutputTree):
 		pass
@@ -103,7 +66,7 @@ class DijetSkimmer(Module):
 
 		# Trigger selection
 		if self._source == Source.kDATA:
-			trigger_result = self.getTriggerResult()
+			trigger_result = self.getTriggerResult(event)
 			for i, trigger in enumerate(self._trigger_list):
 				if trigger_result >> i & 1:
 					self._histograms["TriggerPass"].Fill(i)
@@ -111,28 +74,29 @@ class DijetSkimmer(Module):
 			trigger_result = 1
 		if trigger_result == 0:
 			return False
-		self._histogrrams["TriggeredEvents"].Fill(0)
+		self._histograms["TriggeredEvents"].Fill(0)
 
 		# Jet selection: two jets with pT>30
-		n_jets = 0
+		n_selected_jets = 0
 		pass_njets = False
-		for ijet in xrange(event.nJets):
+		for ijet in xrange(event.nJet):
 			if event.Jet_pt[ijet] > 30.:
-				n_jets += 1
+				n_selected_jets += 1
 				
-			if n_jets >= 2:
-				pass_njets
+			if n_selected_jets >= 2:
+				pass_njets = True
 				break
+
 		if not pass_njets:
 			return False
-		self._histograms["NJets"].Fill(n_jets)
+		self._histograms["NJets"].Fill(n_selected_jets)
 
 		self._histograms["SelectedEvents"].Fill(0)
 		return True
 
-	def getTriggerResult(self):
+	def getTriggerResult(self, event):
 		trigger_result = 0
-		for i, trigger in self._trigger_list:
+		for i, trigger in enumerate(self._trigger_list):
 			trigger_result |= getattr(event, trigger) << i
 		return trigger_result
 

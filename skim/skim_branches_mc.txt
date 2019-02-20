@@ -1,5 +1,5 @@
 # this is a comment
-drop * # start with all
+drop *
 keep nElectron
 keep Electron*
 keep nMuon

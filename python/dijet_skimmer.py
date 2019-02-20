@@ -76,17 +76,16 @@ class DijetSkimmer(Module):
 			return False
 		self._histograms["TriggeredEvents"].Fill(0)
 
-		# Jet selection: two jets with pT>30
+		# Jet selection: two jets with pT>30 and |eta|<2.5
 		n_selected_jets = 0
 		pass_njets = False
 		for ijet in xrange(event.nJet):
-			if event.Jet_pt[ijet] > 30.:
+			if event.Jet_pt[ijet] > 30. and abs(event.Jet_eta[ijet]) < 2.5:
 				n_selected_jets += 1
 				
 			if n_selected_jets >= 2:
 				pass_njets = True
 				break
-
 		if not pass_njets:
 			return False
 		self._histograms["NJets"].Fill(n_selected_jets)

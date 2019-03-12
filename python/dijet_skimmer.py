@@ -7,7 +7,6 @@ from PhysicsTools.NanoAODTools.postprocessing.framework.module import Module
 from PhysicsTools.NanoAODTools.postprocessing.tools import *
 from PhysicsTools.NanoAODTools.postprocessing.framework.enums import *
 
-ROOT.gInterpreter.Declare("#include \"PhysicsTools/DijetSkimmer/interface/NanoAODBase.h\"")
 ROOT.gSystem.Load(os.path.expandvars("$CMSSW_BASE/lib/$SCRAM_ARCH/libPhysicsToolsDijetSkimmer.so"))
 
 class DijetSkimmer(Module):

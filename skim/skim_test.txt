@@ -1,0 +1,4 @@
+# this is a comment
+drop *
+keep nJet
+keep Jet*

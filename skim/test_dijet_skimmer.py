@@ -37,6 +37,3 @@ p_testmc=PostProcessor(outputDir=".",
 	provenance=True)
 p_testmc.run(maxEvents=10000)
 
-if __name__ == "__main__":
-	import argparse
-	parser = argparse.ArgumentParser

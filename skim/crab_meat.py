@@ -51,7 +51,8 @@ if args.jobID == -1:
 		branchsel=branch_list_file,
 		outputbranchsel=branch_list_file,
 		modules=[DijetSkimmer(year=year, source=data_source, dataset=dataset, hist_file="./skim_{}.root".format(args.jobID))],
-		provenance=True)
+		provenance=True,
+		fwkJobReport=True)
 else:
 	skimmer = PostProcessor(outputDir=".",
 		inputFiles=inputFiles(),
@@ -59,7 +60,8 @@ else:
 		branchsel=branch_list_file,
 		outputbranchsel=branch_list_file,
 		modules=[DijetSkimmer(year=year, source=data_source, dataset=dataset, hist_file="./skim_{}.root".format(args.jobID))],
-		provenance=True)
+		provenance=True,
+		fwkJobReport=True)
 skimmer.run(maxEvents=-1)
 
 

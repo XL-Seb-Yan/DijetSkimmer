@@ -42,4 +42,5 @@ echo "asdf"
 python -c "import sys; print sys.path"
 ls -lrth
 python crab_meat.py "$@"
+ls -lR .
 fi

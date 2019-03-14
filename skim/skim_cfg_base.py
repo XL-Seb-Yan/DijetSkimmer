@@ -21,7 +21,7 @@ config.JobType.inputFiles = [
 	os.path.expandvars('$CMSSW_BASE/src/PhysicsTools/DijetSkimmer/skim/skim_branches_data.txt'),
 	os.path.expandvars('$CMSSW_BASE/src/PhysicsTools/DijetSkimmer/skim/skim_branches_mc.txt'),
 	os.path.expandvars('$CMSSW_BASE/src/PhysicsTools/DijetSkimmer/skim/skim_branches.txt'),
-	os.path.expandvars('$CMSSW_BASE/src/PhysicsTools/DijetSkimmer/skim/FrameworkJobReport.xml'),
+	#os.path.expandvars('$CMSSW_BASE/src/PhysicsTools/DijetSkimmer/skim/FrameworkJobReport.xml'),
 	]
 config.JobType.sendPythonFolder	 = True
 config.JobType.allowUndistributedCMSSW = True

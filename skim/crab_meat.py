@@ -52,7 +52,8 @@ if args.jobID == -1:
 		outputbranchsel=branch_list_file,
 		modules=[DijetSkimmer(year=year, source=data_source, dataset=dataset, hist_file="./skim_{}.root".format(args.jobID))],
 		provenance=True,
-		fwkJobReport=True)
+		fwkJobReport=True,
+		haddFileName="nanoskim_{}.root".format(args.jobID))
 else:
 	skimmer = PostProcessor(outputDir=".",
 		inputFiles=inputFiles(),
@@ -61,7 +62,8 @@ else:
 		outputbranchsel=branch_list_file,
 		modules=[DijetSkimmer(year=year, source=data_source, dataset=dataset, hist_file="./skim_{}.root".format(args.jobID))],
 		provenance=True,
-		fwkJobReport=True)
+		fwkJobReport=True,
+		haddFileName="nanoskim_{}.root".format(args.jobID))
 skimmer.run(maxEvents=-1)
 
 

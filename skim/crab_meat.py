@@ -50,7 +50,7 @@ if args.jobID == -1:
 		cut=None,
 		branchsel=branch_list_file,
 		outputbranchsel=branch_list_file,
-		modules=[DijetSkimmer(year=year, source=data_source, dataset=dataset, hist_file="./skim_{}.root".format(args.jobID))],
+		modules=[DijetSkimmer(year=year, source=data_source, dataset=dataset, hist_file="./hists_{}.root".format(args.jobID))],
 		provenance=True,
 		fwkJobReport=True,
 		haddFileName="nanoskim_{}.root".format(args.jobID))
@@ -60,7 +60,7 @@ else:
 		cut=None,
 		branchsel=branch_list_file,
 		outputbranchsel=branch_list_file,
-		modules=[DijetSkimmer(year=year, source=data_source, dataset=dataset, hist_file="./skim_{}.root".format(args.jobID))],
+		modules=[DijetSkimmer(year=year, source=data_source, dataset=dataset, hist_file="./hists_{}.root".format(args.jobID))],
 		provenance=True,
 		fwkJobReport=True,
 		haddFileName="nanoskim_{}.root".format(args.jobID))

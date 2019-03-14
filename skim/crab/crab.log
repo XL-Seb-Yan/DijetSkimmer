@@ -1,0 +1,196 @@
+DEBUG 2019-03-12 18:05:48,376: 	 Executing command: 'submit'
+DEBUG 2019-03-12 18:05:48,377: 	 Found CRAB cache file /home/dryu/.crab3
+DEBUG 2019-03-12 18:05:48,416: 	 Checking credentials
+DEBUG 2019-03-12 18:05:48,416: 	 Found proxy file /tmp/x509up_u3830
+DEBUG 2019-03-12 18:05:48,416: 	 Getting proxy life time left
+DEBUG 2019-03-12 18:05:48,520: 	 Executing : 
+ command : voms-proxy-info -file /tmp/x509up_u3830 -timeleft
+ output : 43198
+
+ error: 
+ retcode : 0
+DEBUG 2019-03-12 18:05:48,623: 	 Executing : 
+ command : voms-proxy-info -file /tmp/x509up_u3830 -actimeleft
+ output : 43198
+
+ error: 
+ retcode : 0
+DEBUG 2019-03-12 18:05:48,624: 	 Proxy valid for 11:59:58 hours
+INFO 2019-03-12 18:05:48,624: 	 Will use CRAB configuration file skim_JetHTRun2017C_TEST_cfg.py
+DEBUG 2019-03-12 18:05:48,625: 	 Loading CRAB configuration file.
+ERROR 2019-03-12 18:05:48,639: 	 Error while loading CRAB configuration:
+name 'os' is not defined
+Please refer to https://twiki.cern.ch/twiki/bin/view/CMSPublic/CRAB3CommonErrors#Syntax_error_in_CRAB_configurati
+See the ./crab.log file for more details.
+The documentation about the CRAB configuration file can be found in https://twiki.cern.ch/twiki/bin/view/CMSPublic/CRAB3ConfigurationFile
+ERROR 2019-03-12 18:05:48,639: 	 Caught exception
+Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/crab3/slc6_amd64_gcc493/cms/crabclient/3.3.1903.patch1/bin/crab", line 160, in <module>
+    client()
+  File "/cvmfs/cms.cern.ch/crab3/slc6_amd64_gcc493/cms/crabclient/3.3.1903.patch1/bin/crab", line 146, in __call__
+    self.cmd = sub_cmd(self.logger, args[1:])
+  File "/cvmfs/cms.cern.ch/crab3/slc6_amd64_gcc493/cms/crabclient/3.3.1903.patch1/lib/python2.7/site-packages/CRABClient/Commands/submit.py", line 34, in __init__
+    SubCommand.__init__(self, logger, cmdargs, disable_interspersed_args=True)
+  File "/cvmfs/cms.cern.ch/crab3/slc6_amd64_gcc493/cms/crabclient/3.3.1903.patch1/lib/python2.7/site-packages/CRABClient/Commands/SubCommand.py", line 311, in __init__
+    self.loadConfig(self.options.config, self.args)
+  File "/cvmfs/cms.cern.ch/crab3/slc6_amd64_gcc493/cms/crabclient/3.3.1903.patch1/lib/python2.7/site-packages/CRABClient/Commands/SubCommand.py", line 87, in loadConfig
+    raise ConfigurationException(configmsg)
+ConfigurationException: Error while loading CRAB configuration:
+name 'os' is not defined
+Please refer to https://twiki.cern.ch/twiki/bin/view/CMSPublic/CRAB3CommonErrors#Syntax_error_in_CRAB_configurati
+See the ./crab.log file for more details.
+The documentation about the CRAB configuration file can be found in https://twiki.cern.ch/twiki/bin/view/CMSPublic/CRAB3ConfigurationFile
+DEBUG 2019-03-12 18:08:55,221: 	 Executing command: 'submit'
+DEBUG 2019-03-12 18:08:55,222: 	 Found CRAB cache file /home/dryu/.crab3
+DEBUG 2019-03-12 18:08:55,235: 	 Checking credentials
+DEBUG 2019-03-12 18:08:55,235: 	 Found proxy file /tmp/x509up_u3830
+DEBUG 2019-03-12 18:08:55,235: 	 Getting proxy life time left
+DEBUG 2019-03-12 18:08:55,339: 	 Executing : 
+ command : voms-proxy-info -file /tmp/x509up_u3830 -timeleft
+ output : 43011
+
+ error: 
+ retcode : 0
+DEBUG 2019-03-12 18:08:55,443: 	 Executing : 
+ command : voms-proxy-info -file /tmp/x509up_u3830 -actimeleft
+ output : 43011
+
+ error: 
+ retcode : 0
+DEBUG 2019-03-12 18:08:55,443: 	 Proxy valid for 11:56:51 hours
+INFO 2019-03-12 18:08:55,444: 	 Will use CRAB configuration file skim_test_jetht_cfg.py
+DEBUG 2019-03-12 18:08:55,444: 	 Loading CRAB configuration file.
+ERROR 2019-03-12 18:08:55,459: 	 Error while loading CRAB configuration:
+name 'DijetSkim_test1' is not defined
+Please refer to https://twiki.cern.ch/twiki/bin/view/CMSPublic/CRAB3CommonErrors#Syntax_error_in_CRAB_configurati
+See the ./crab.log file for more details.
+The documentation about the CRAB configuration file can be found in https://twiki.cern.ch/twiki/bin/view/CMSPublic/CRAB3ConfigurationFile
+ERROR 2019-03-12 18:08:55,460: 	 Caught exception
+Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/crab3/slc6_amd64_gcc493/cms/crabclient/3.3.1903.patch1/bin/crab", line 160, in <module>
+    client()
+  File "/cvmfs/cms.cern.ch/crab3/slc6_amd64_gcc493/cms/crabclient/3.3.1903.patch1/bin/crab", line 146, in __call__
+    self.cmd = sub_cmd(self.logger, args[1:])
+  File "/cvmfs/cms.cern.ch/crab3/slc6_amd64_gcc493/cms/crabclient/3.3.1903.patch1/lib/python2.7/site-packages/CRABClient/Commands/submit.py", line 34, in __init__
+    SubCommand.__init__(self, logger, cmdargs, disable_interspersed_args=True)
+  File "/cvmfs/cms.cern.ch/crab3/slc6_amd64_gcc493/cms/crabclient/3.3.1903.patch1/lib/python2.7/site-packages/CRABClient/Commands/SubCommand.py", line 311, in __init__
+    self.loadConfig(self.options.config, self.args)
+  File "/cvmfs/cms.cern.ch/crab3/slc6_amd64_gcc493/cms/crabclient/3.3.1903.patch1/lib/python2.7/site-packages/CRABClient/Commands/SubCommand.py", line 87, in loadConfig
+    raise ConfigurationException(configmsg)
+ConfigurationException: Error while loading CRAB configuration:
+name 'DijetSkim_test1' is not defined
+Please refer to https://twiki.cern.ch/twiki/bin/view/CMSPublic/CRAB3CommonErrors#Syntax_error_in_CRAB_configurati
+See the ./crab.log file for more details.
+The documentation about the CRAB configuration file can be found in https://twiki.cern.ch/twiki/bin/view/CMSPublic/CRAB3ConfigurationFile
+DEBUG 2019-03-12 18:10:02,590: 	 Executing command: 'submit'
+DEBUG 2019-03-12 18:10:02,591: 	 Found CRAB cache file /home/dryu/.crab3
+DEBUG 2019-03-12 18:10:02,603: 	 Checking credentials
+DEBUG 2019-03-12 18:10:02,604: 	 Found proxy file /tmp/x509up_u3830
+DEBUG 2019-03-12 18:10:02,604: 	 Getting proxy life time left
+ERROR 2019-03-12 18:10:02,678: 	 Keyboard Interrupted
+DEBUG 2019-03-12 18:10:08,720: 	 Executing command: 'submit'
+DEBUG 2019-03-12 18:10:08,720: 	 Found CRAB cache file /home/dryu/.crab3
+DEBUG 2019-03-12 18:10:08,730: 	 Checking credentials
+DEBUG 2019-03-12 18:10:08,731: 	 Found proxy file /tmp/x509up_u3830
+DEBUG 2019-03-12 18:10:08,731: 	 Getting proxy life time left
+DEBUG 2019-03-12 18:10:08,834: 	 Executing : 
+ command : voms-proxy-info -file /tmp/x509up_u3830 -timeleft
+ output : 42938
+
+ error: 
+ retcode : 0
+DEBUG 2019-03-12 18:10:08,938: 	 Executing : 
+ command : voms-proxy-info -file /tmp/x509up_u3830 -actimeleft
+ output : 42938
+
+ error: 
+ retcode : 0
+DEBUG 2019-03-12 18:10:08,938: 	 Proxy valid for 11:55:38 hours
+INFO 2019-03-12 18:10:08,938: 	 Will use CRAB configuration file skim_test_jetht_cfg.py
+DEBUG 2019-03-12 18:10:08,938: 	 Loading CRAB configuration file.
+DEBUG 2019-03-12 18:10:10,085: 	 Will use CRAB Analysis plugin (i.e. will run an analysis job type).
+ERROR 2019-03-12 18:10:10,086: 	 Working area '/user_data/dryu/Trijets/CMSSW_10_2_11_patch1/src/PhysicsTools/DijetSkimmer/skim/crab/crab_DijetSkim_test1' already exists 
+Please change the requestName in the config file
+ERROR 2019-03-12 18:10:10,086: 	 Caught exception
+Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/crab3/slc6_amd64_gcc493/cms/crabclient/3.3.1903.patch1/bin/crab", line 160, in <module>
+    client()
+  File "/cvmfs/cms.cern.ch/crab3/slc6_amd64_gcc493/cms/crabclient/3.3.1903.patch1/bin/crab", line 146, in __call__
+    self.cmd = sub_cmd(self.logger, args[1:])
+  File "/cvmfs/cms.cern.ch/crab3/slc6_amd64_gcc493/cms/crabclient/3.3.1903.patch1/lib/python2.7/site-packages/CRABClient/Commands/submit.py", line 34, in __init__
+    SubCommand.__init__(self, logger, cmdargs, disable_interspersed_args=True)
+  File "/cvmfs/cms.cern.ch/crab3/slc6_amd64_gcc493/cms/crabclient/3.3.1903.patch1/lib/python2.7/site-packages/CRABClient/Commands/SubCommand.py", line 315, in __init__
+    getattr(self.configuration.General, 'requestName', None))
+  File "/cvmfs/cms.cern.ch/crab3/slc6_amd64_gcc493/cms/crabclient/3.3.1903.patch1/lib/python2.7/site-packages/CRABClient/ClientUtilities.py", line 404, in createWorkArea
+    raise ConfigException("Working area '%s' already exists \nPlease change the requestName in the config file" % fullpath)
+ConfigException: Working area '/user_data/dryu/Trijets/CMSSW_10_2_11_patch1/src/PhysicsTools/DijetSkimmer/skim/crab/crab_DijetSkim_test1' already exists 
+Please change the requestName in the config file
+DEBUG 2019-03-12 18:11:53,520: 	 Executing command: 'submit'
+DEBUG 2019-03-12 18:11:53,521: 	 Found CRAB cache file /home/dryu/.crab3
+DEBUG 2019-03-12 18:11:53,532: 	 Checking credentials
+DEBUG 2019-03-12 18:11:53,533: 	 Found proxy file /tmp/x509up_u3830
+DEBUG 2019-03-12 18:11:53,533: 	 Getting proxy life time left
+DEBUG 2019-03-12 18:11:53,636: 	 Executing : 
+ command : voms-proxy-info -file /tmp/x509up_u3830 -timeleft
+ output : 42833
+
+ error: 
+ retcode : 0
+DEBUG 2019-03-12 18:11:53,740: 	 Executing : 
+ command : voms-proxy-info -file /tmp/x509up_u3830 -actimeleft
+ output : 42833
+
+ error: 
+ retcode : 0
+DEBUG 2019-03-12 18:11:53,740: 	 Proxy valid for 11:53:53 hours
+INFO 2019-03-12 18:11:53,741: 	 Will use CRAB configuration file skim_test_jetht_cfg.py
+DEBUG 2019-03-12 18:11:53,741: 	 Loading CRAB configuration file.
+DEBUG 2019-03-12 18:11:55,191: 	 Will use CRAB Analysis plugin (i.e. will run an analysis job type).
+ERROR 2019-03-12 18:11:55,192: 	 Working area '/user_data/dryu/Trijets/CMSSW_10_2_11_patch1/src/PhysicsTools/DijetSkimmer/skim/crab/crab_DijetSkim_test1' already exists 
+Please change the requestName in the config file
+ERROR 2019-03-12 18:11:55,192: 	 Caught exception
+Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/crab3/slc6_amd64_gcc493/cms/crabclient/3.3.1903.patch1/bin/crab", line 160, in <module>
+    client()
+  File "/cvmfs/cms.cern.ch/crab3/slc6_amd64_gcc493/cms/crabclient/3.3.1903.patch1/bin/crab", line 146, in __call__
+    self.cmd = sub_cmd(self.logger, args[1:])
+  File "/cvmfs/cms.cern.ch/crab3/slc6_amd64_gcc493/cms/crabclient/3.3.1903.patch1/lib/python2.7/site-packages/CRABClient/Commands/submit.py", line 34, in __init__
+    SubCommand.__init__(self, logger, cmdargs, disable_interspersed_args=True)
+  File "/cvmfs/cms.cern.ch/crab3/slc6_amd64_gcc493/cms/crabclient/3.3.1903.patch1/lib/python2.7/site-packages/CRABClient/Commands/SubCommand.py", line 315, in __init__
+    getattr(self.configuration.General, 'requestName', None))
+  File "/cvmfs/cms.cern.ch/crab3/slc6_amd64_gcc493/cms/crabclient/3.3.1903.patch1/lib/python2.7/site-packages/CRABClient/ClientUtilities.py", line 404, in createWorkArea
+    raise ConfigException("Working area '%s' already exists \nPlease change the requestName in the config file" % fullpath)
+ConfigException: Working area '/user_data/dryu/Trijets/CMSSW_10_2_11_patch1/src/PhysicsTools/DijetSkimmer/skim/crab/crab_DijetSkim_test1' already exists 
+Please change the requestName in the config file
+DEBUG 2019-03-12 18:45:01,278: 	 Executing command: 'submit'
+DEBUG 2019-03-12 18:45:01,279: 	 Found CRAB cache file /home/dryu/.crab3
+DEBUG 2019-03-12 18:45:01,291: 	 Checking credentials
+DEBUG 2019-03-12 18:45:01,292: 	 Found proxy file /tmp/x509up_u3830
+DEBUG 2019-03-12 18:45:01,292: 	 Getting proxy life time left
+DEBUG 2019-03-12 18:45:01,395: 	 Executing : 
+ command : voms-proxy-info -file /tmp/x509up_u3830 -timeleft
+ output : 40845
+
+ error: 
+ retcode : 0
+DEBUG 2019-03-12 18:45:01,499: 	 Executing : 
+ command : voms-proxy-info -file /tmp/x509up_u3830 -actimeleft
+ output : 40845
+
+ error: 
+ retcode : 0
+DEBUG 2019-03-12 18:45:01,499: 	 Proxy valid for 11:20:45 hours
+ERROR 2019-03-12 18:45:01,500: 	 CRAB configuration file crab_cfg.py not found.
+ERROR 2019-03-12 18:45:01,500: 	 Caught exception
+Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/crab3/slc6_amd64_gcc493/cms/crabclient/3.3.1903.patch1/bin/crab", line 160, in <module>
+    client()
+  File "/cvmfs/cms.cern.ch/crab3/slc6_amd64_gcc493/cms/crabclient/3.3.1903.patch1/bin/crab", line 146, in __call__
+    self.cmd = sub_cmd(self.logger, args[1:])
+  File "/cvmfs/cms.cern.ch/crab3/slc6_amd64_gcc493/cms/crabclient/3.3.1903.patch1/lib/python2.7/site-packages/CRABClient/Commands/submit.py", line 34, in __init__
+    SubCommand.__init__(self, logger, cmdargs, disable_interspersed_args=True)
+  File "/cvmfs/cms.cern.ch/crab3/slc6_amd64_gcc493/cms/crabclient/3.3.1903.patch1/lib/python2.7/site-packages/CRABClient/Commands/SubCommand.py", line 311, in __init__
+    self.loadConfig(self.options.config, self.args)
+  File "/cvmfs/cms.cern.ch/crab3/slc6_amd64_gcc493/cms/crabclient/3.3.1903.patch1/lib/python2.7/site-packages/CRABClient/Commands/SubCommand.py", line 49, in loadConfig
+    raise ConfigurationException("CRAB configuration file %s not found." % (configname))
+ConfigurationException: CRAB configuration file crab_cfg.py not found.

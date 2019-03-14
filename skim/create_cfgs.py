@@ -242,6 +242,7 @@ datasets = [
 
 import re
 re_ver = re.compile("(?P<version>ver\d)")
+re_year_data = re.compile("Run(?P<year>\d\d\d\d)")
 
 for dataset in datasets:
 	dataset_short = dataset.split("/")[1].replace("_TuneCP5", "").replace("_TuneCUETP8M1", "").replace("_13TeV", "").replace("_pythia8", "")
@@ -252,6 +253,19 @@ for dataset in datasets:
 		re_ver_match = re_ver.search(second_piece)
 		if re_ver_match:
 			dataset_short += re_ver_match.group("version")
+		re_year_match = re_year_data.search(dataset)
+		if re_year_match:
+			year = re_year_match.group("year")
+		else:
+			print "ERROR : Failed to regex year out of {}".format(dataset)
+			sys.exit(1)
+	else:
+		if "RunIISummer16" in dataset:
+			year = 2016
+		elif "RunIIFall17" in dataset:
+			year = 2017
+		elif "RunIIAutumn18" in dataset:
+			year = 2018
 
 	cfg_path = "crab/skim_{}_cfg.py".format(dataset_short)
 	with open(cfg_path, 'w') as f_out:
@@ -259,11 +273,11 @@ for dataset in datasets:
 			for line in f_in:
 				if "config.JobType.scriptArgs" in line:
 					if "JetHT" in dataset_short:
-						f_out.write("config.JobType.scriptArgs = [\"source=data\", \"dataset=JetHT\"]\n")
+						f_out.write("config.JobType.scriptArgs = [\"source=data\", \"dataset=JetHT\", \"year={}\"]\n".format(year))
 					elif "SingleMuon" in dataset_short:
-						f_out.write("config.JobType.scriptArgs = [\"source=data\", \"dataset=SingleMuon\"]\n")
+						f_out.write("config.JobType.scriptArgs = [\"source=data\", \"dataset=SingleMuon\", \"year={}\"]\n".format(year))
 					else:
-						f_out.write("config.JobType.scriptArgs = [\"source=mc\"]\n")
+						f_out.write("config.JobType.scriptArgs = [\"source=mc\", \"year={}\"]\n".format(year))
 				else:
 					f_out.write(line)
 		f_out.write("config.Data.inputDataset = '{}'".format(dataset))
@@ -274,14 +288,14 @@ with open("crab/skim_test_jetht_cfg.py", 'w') as f_out:
 	with open("skim_cfg_base.py", 'r') as f_in:
 		for line in f_in:
 			if "config.JobType.scriptArgs" in line:
-				if "JetHT" in dataset_short:
-					f_out.write("config.JobType.scriptArgs = [\"source=data\", \"dataset=JetHT\"]\n")
-				elif "SingleMuon" in dataset_short:
-					f_out.write("config.JobType.scriptArgs = [\"source=data\", \"dataset=SingleMuon\"]\n")
+				if "JetHT" in test_dataset:
+					f_out.write("config.JobType.scriptArgs = [\"--source=data\", \"--dataset=JetHT\", \"--year={}\"]\n".format(year))
+				elif "SingleMuon" in test_dataset:
+					f_out.write("config.JobType.scriptArgs = [\"--source=data\", \"--dataset=SingleMuon\", \"--year={}\"]\n".format(year))
 				else:
-					f_out.write("config.JobType.scriptArgs = [\"source=mc\"]\n")
+					f_out.write("config.JobType.scriptArgs = [\"--source=mc\", \"--year={}\"]\n".format(year))
 			elif "job_name = " in line:
-				f_out.write("job_name = \"DijetSkim_test1\"\n")
+				f_out.write("job_name = \"DijetSkim_test15\"\n")
 			else:
 				f_out.write(line)
-	f_out.write("config.Data.inputDataset = '{}'".format(dataset))
+	f_out.write("config.Data.inputDataset = '{}'".format(test_dataset))

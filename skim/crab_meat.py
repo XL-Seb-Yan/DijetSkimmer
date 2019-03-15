@@ -14,6 +14,7 @@ parser.add_argument("jobID", type=int, help="JobID (CRAB passes this as the firs
 parser.add_argument("--source", type=str, help="data or mc")
 parser.add_argument("--dataset", type=str, default=None, help="Dataset name; controls trigger selection")
 parser.add_argument("--year", type=int, default=None, help="2016, 2017, or 2018")
+parser.add_argument("--haddFileName", type=str, default="nanoskim.root", help="hadd filename")
 args = parser.parse_args()
 
 if args.source == "data":
@@ -53,7 +54,7 @@ if args.jobID == -1:
 		modules=[DijetSkimmer(year=year, source=data_source, dataset=dataset, hist_file="./hists_{}.root".format(args.jobID))],
 		provenance=True,
 		fwkJobReport=True,
-		haddFileName="nanoskim_{}.root".format(args.jobID))
+		haddFileName=args.haddFileName)
 else:
 	skimmer = PostProcessor(outputDir=".",
 		inputFiles=inputFiles(),
@@ -63,7 +64,7 @@ else:
 		modules=[DijetSkimmer(year=year, source=data_source, dataset=dataset, hist_file="./hists_{}.root".format(args.jobID))],
 		provenance=True,
 		fwkJobReport=True,
-		haddFileName="nanoskim_{}.root".format(args.jobID))
+		haddFileName=args.haddFileName)
 skimmer.run(maxEvents=-1)
 
 

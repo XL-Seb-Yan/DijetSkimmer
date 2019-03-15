@@ -37,10 +37,14 @@ cd -
 echo "lling CMSSW python dir after compiling:"
 ls -lRth $CMSSW_BASE/python
 
+# Output filename
+export HADDFILENAME="nanoskim_$1.root"
+sed -i "s/nanoskim.root/$HADDFILENAME/g" PSet.py
+
 echo Found Proxy in: $X509_USER_PROXY
 echo "asdf"
 python -c "import sys; print sys.path"
 ls -lrth
-python crab_meat.py "$@"
+python crab_meat.py "$@" --haddFileName $HADDFILENAME
 ls -lR .
 fi

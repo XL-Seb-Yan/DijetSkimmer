@@ -273,11 +273,11 @@ for dataset in datasets:
 			for line in f_in:
 				if "config.JobType.scriptArgs" in line:
 					if "JetHT" in dataset_short:
-						f_out.write("config.JobType.scriptArgs = [\"source=data\", \"dataset=JetHT\", \"year={}\"]\n".format(year))
+						f_out.write("config.JobType.scriptArgs = [\"--source=data\", \"--dataset=JetHT\", \"--year={}\"]\n".format(year))
 					elif "SingleMuon" in dataset_short:
-						f_out.write("config.JobType.scriptArgs = [\"source=data\", \"dataset=SingleMuon\", \"year={}\"]\n".format(year))
+						f_out.write("config.JobType.scriptArgs = [\"--source=data\", \"--dataset=SingleMuon\", \"--year={}\"]\n".format(year))
 					else:
-						f_out.write("config.JobType.scriptArgs = [\"source=mc\", \"year={}\"]\n".format(year))
+						f_out.write("config.JobType.scriptArgs = [\"--source=mc\", \"--year={}\"]\n".format(year))
 				elif "job_name = " in line:
 					f_out.write(line.replace("DATASET", dataset_short))
 				else:

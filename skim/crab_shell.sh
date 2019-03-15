@@ -40,6 +40,8 @@ ls -lRth $CMSSW_BASE/python
 # Output filename
 export HADDFILENAME="nanoskim_$1.root"
 sed -i "s/nanoskim.root/$HADDFILENAME/g" PSet.py
+echo "jkl print PSet:"
+cat PSet.py
 
 echo Found Proxy in: $X509_USER_PROXY
 echo "asdf"

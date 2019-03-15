@@ -194,3 +194,9 @@ Traceback (most recent call last):
   File "/cvmfs/cms.cern.ch/crab3/slc6_amd64_gcc493/cms/crabclient/3.3.1903.patch1/lib/python2.7/site-packages/CRABClient/Commands/SubCommand.py", line 49, in loadConfig
     raise ConfigurationException("CRAB configuration file %s not found." % (configname))
 ConfigurationException: CRAB configuration file crab_cfg.py not found.
+DEBUG 2019-03-14 17:39:02,316: 	 Executing command: 'submit'
+DEBUG 2019-03-14 17:39:02,316: 	 Found CRAB cache file /afs/cern.ch/user/d/dryu/.crab3
+DEBUG 2019-03-14 17:39:02,345: 	 Checking credentials
+DEBUG 2019-03-14 17:39:02,345: 	 Proxy file /tmp/x509up_u5882 not found
+DEBUG 2019-03-14 17:39:02,345: 	 Creating new proxy for 24:00 hours with VO group '' and VO role 'NULL'.
+ERROR 2019-03-14 17:41:12,753: 	 Keyboard Interrupted

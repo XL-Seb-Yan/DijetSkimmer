@@ -26,16 +26,10 @@ mv src $CMSSW_BASE/src
 #mv module $CMSSW_BASE/module
 mv python $CMSSW_BASE/python
 
-echo "lling CMSSW python dir before compiling:"
-ls -lRth $CMSSW_BASE/python
-
 cd $CMSSW_BASE/src
 cmsenv
 scram b -j8
 cd -
-
-echo "lling CMSSW python dir after compiling:"
-ls -lRth $CMSSW_BASE/python
 
 # Output filename
 export HADDFILENAME="nanoskim_$1.root"
@@ -48,5 +42,5 @@ echo "asdf"
 python -c "import sys; print sys.path"
 ls -lrth
 python crab_meat.py "$@" --haddFileName $HADDFILENAME
-ls -lR .
+ls -l
 fi

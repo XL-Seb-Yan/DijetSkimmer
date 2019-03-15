@@ -3,7 +3,7 @@ from WMCore.Configuration import Configuration
 from CRABClient.UserUtilities import config, getUsernameFromSiteDB
 
 config = Configuration()
-job_name = "DijetSkim_Res1ToRes2GluTo3Glu_M1-9000_R-0p2-madgraph-pythia8_1_0_0"
+job_name = "DijetSkim_Res1ToRes2GluTo3Glu_M1-9000_R-0p2-madgraph-pythia8_1_0_1"
 
 config.section_("General")
 config.General.requestName = job_name
@@ -32,8 +32,8 @@ config.section_("Data")
 config.Data.inputDBS = 'global'
 config.Data.splitting = 'FileBased'
 #config.Data.splitting = 'EventAwareLumiBased'
-config.Data.unitsPerJob = 2
-config.Data.totalUnits = 10
+config.Data.unitsPerJob = 4
+#config.Data.totalUnits = 10
 config.JobType.allowUndistributedCMSSW = True
 config.Data.outLFNDirBase = '/store/user/{}/{}'.format(getUsernameFromSiteDB(), job_name)
 config.Data.publication = False

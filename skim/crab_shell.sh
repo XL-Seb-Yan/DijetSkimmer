@@ -41,5 +41,6 @@ echo Found Proxy in: $X509_USER_PROXY
 echo "asdf"
 ls -lrth
 python crab_meat.py "$@" --haddFileName $HADDFILENAME
+cp "nanoskim_$1.root" nanoskim.root
 ls -l
 fi

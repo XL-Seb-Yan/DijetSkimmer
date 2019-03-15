@@ -23,7 +23,7 @@ config.JobType.inputFiles = [
 	os.path.expandvars('$CMSSW_BASE/src/PhysicsTools/DijetSkimmer/skim/skim_branches.txt'),
 	#os.path.expandvars('$CMSSW_BASE/src/PhysicsTools/DijetSkimmer/skim/FrameworkJobReport.xml'),
 	]
-#config.JobType.outputFiles = ["nanoskim.root"]
+config.JobType.outputFiles = ["nanoskim.root"]
 config.JobType.sendPythonFolder	 = True
 config.JobType.allowUndistributedCMSSW = True
 config.section_("Data")

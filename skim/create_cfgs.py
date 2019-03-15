@@ -278,6 +278,8 @@ for dataset in datasets:
 						f_out.write("config.JobType.scriptArgs = [\"source=data\", \"dataset=SingleMuon\", \"year={}\"]\n".format(year))
 					else:
 						f_out.write("config.JobType.scriptArgs = [\"source=mc\", \"year={}\"]\n".format(year))
+				elif "job_name = " in line:
+					f_out.write(line.replace("DATASET", dataset_short))
 				else:
 					f_out.write(line)
 		f_out.write("config.Data.inputDataset = '{}'".format(dataset))

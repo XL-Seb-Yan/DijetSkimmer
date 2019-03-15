@@ -39,7 +39,6 @@ cat PSet.py
 
 echo Found Proxy in: $X509_USER_PROXY
 echo "asdf"
-python -c "import sys; print sys.path"
 ls -lrth
 python crab_meat.py "$@" --haddFileName $HADDFILENAME
 ls -l

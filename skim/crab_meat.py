@@ -17,6 +17,9 @@ parser.add_argument("--year", type=int, default=None, help="2016, 2017, or 2018"
 parser.add_argument("--haddFileName", type=str, default="nanoskim.root", help="hadd filename")
 args = parser.parse_args()
 
+print "crab_meat arguments:"
+print args
+
 if args.source == "data":
 	branch_list_file = "skim_branches_data.txt"
 	data_source = Source.kDATA

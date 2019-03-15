@@ -52,7 +52,10 @@ class DijetSkimmer(Module):
 	def endJob(self):
 		for hist_name in ["ProcessedEvents", "TriggeredEvents", "NJets", "SelectedEvents"]:
 			print "[DijetSkimmer::endJob] INFO : {} = {}".format(hist_name, self._histograms[hist_name].Integral())
-	
+		self._hist_file.cd()
+		for hist_name, hist in self._histograms.iteritems():
+			hist.Write()
+
 	def beginFile(self, inputFile, outputFile, inputTree, wrappedOutputTree):
 		pass
 

@@ -3,11 +3,11 @@ from WMCore.Configuration import Configuration
 from CRABClient.UserUtilities import config, getUsernameFromSiteDB
 
 config = Configuration()
-job_name = "DijetSkim_0_0_1"
+job_name = "DijetSkim_1_0_0"
 
 config.section_("General")
 config.General.requestName = job_name
-config.General.transferLogs=True
+config.General.transferLogs = False
 config.section_("JobType")
 config.JobType.pluginName = 'Analysis'
 
@@ -23,7 +23,7 @@ config.JobType.inputFiles = [
 	os.path.expandvars('$CMSSW_BASE/src/PhysicsTools/DijetSkimmer/skim/skim_branches.txt'),
 	#os.path.expandvars('$CMSSW_BASE/src/PhysicsTools/DijetSkimmer/skim/FrameworkJobReport.xml'),
 	]
-config.JobType.outputFiles = ["nanoskim.root"]
+config.JobType.outputFiles = ["nanoskim.root", "hists.root"]
 config.JobType.sendPythonFolder	 = True
 config.JobType.allowUndistributedCMSSW = True
 config.section_("Data")

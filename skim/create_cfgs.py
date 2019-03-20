@@ -254,7 +254,7 @@ def make_cfg(year, dataset, version):
 	# For the cfg filename, create a string uniquely representing each dataset above
 	dataset_short = dataset.split("/")[1]
 	for remove_str in remove_strs:
-		dataset_short.replace(remove_str, "")
+		dataset_short = dataset_short.replace(remove_str, "")
 
 	# For data, add the run-period to the short name
 	if "JetHT" in dataset_short or "SingleMuon" in dataset_short:
@@ -274,7 +274,7 @@ def make_cfg(year, dataset, version):
 	cfg_path = os.path.expandvars("$CMSSW_BASE/src/PhysicsTools/DijetSkimmer/skim/crab/skim_{}_{}_cfg.py".format(dataset_short, year))
 	print version
 	if "test" in version:
-		cfg_path.replace("cfg.py", "test_cfg.py")
+		cfg_path = cfg_path.replace("cfg.py", "test_cfg.py")
 	print cfg_path
 	with open(cfg_path, 'w') as f_out:
 		with open("skim_cfg_base.py", 'r') as f_in:

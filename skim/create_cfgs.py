@@ -258,10 +258,14 @@ submit_script = open(os.path.expandvars("$CMSSW_BASE/src/PhysicsTools/DijetSkimm
 resubmit_script = open(os.path.expandvars("$CMSSW_BASE/src/PhysicsTools/DijetSkimmer/skim/submit.sh"), "w")
 status_script = open(os.path.expandvars("$CMSSW_BASE/src/PhysicsTools/DijetSkimmer/skim/submit.sh"), "w")
 
+remove_strs = ["_TuneCP5", "_TuneCUETP8M1", "_13TeV", "_pythia8", "_madgraph", "-pythia8", "-madgraph"]
+
 for year in [2016, 2017, 2018]:
 	for dataset in datasets[year]:
 		# For the cfg filename, create a string uniquely representing each dataset above
 		dataset_short = dataset.split("/")[1]
+		for remove_str in remove_strs:
+			dataset_short.replace(remove_str, "")
 
 		# For data, add the run-period to the short name
 		if "JetHT" in dataset_short or "SingleMuon" in dataset_short:
@@ -290,7 +294,7 @@ for year in [2016, 2017, 2018]:
 						else:
 							f_out.write("config.JobType.scriptArgs = [\"--source=mc\", \"--year={}\"]\n".format(year))
 					elif "job_name = " in line:
-						f_out.write(line.replace("VERSION", version))
+						f_out.write(line.replace("DATASET", dataset_short).replace("VERSION", version))
 					else:
 						f_out.write(line)
 			f_out.write("config.Data.inputDataset = '{}'".format(dataset))

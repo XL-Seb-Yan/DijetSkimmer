@@ -1,4 +1,5 @@
 import os
+import copy
 import ROOT
 ROOT.PyConfig.IgnoreCommandLineOptions = True
 
@@ -44,8 +45,7 @@ class DijetSkimmer(Module):
  				for i, trigger in enumerate(self._trigger_list):
  					self._histograms["TriggerPass"].GetXaxis().SetBinLabel(i+1, trigger)
 
-
-		elif self._source == Source.kDATA:
+		elif self._source == Source.kMC:
 			# JECs are already applied to NanoAOD, so nothing to do
 			pass
 
@@ -57,7 +57,13 @@ class DijetSkimmer(Module):
 			hist.Write()
 
 	def beginFile(self, inputFile, outputFile, inputTree, wrappedOutputTree):
-		pass
+		# Make a list of triggers that are actually present in the TTree
+		self._trigger_list_file = []
+		for trigger_name in self._trigger_list:
+			if inputTree.GetBranch(trigger_name):
+				self._trigger_list_file.append(trigger_name)
+			else:
+				print "[DijetSkimmer::beginFile] WARNING : Trigger {} is not present in the input ntuple! Skipping this trigger.".format(trigger_name)
 
 	def endFile(self, inputFile, outputFile, inputTree, wrappedOutputTree):
 		pass
@@ -69,7 +75,7 @@ class DijetSkimmer(Module):
 		# Trigger selection
 		if self._source == Source.kDATA:
 			trigger_result = self.getTriggerResult(event)
-			for i, trigger in enumerate(self._trigger_list):
+			for i, trigger in enumerate(self._trigger_list_file):
 				if trigger_result >> i & 1:
 					self._histograms["TriggerPass"].Fill(i)
 		else:

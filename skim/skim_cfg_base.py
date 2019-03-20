@@ -3,7 +3,7 @@ from WMCore.Configuration import Configuration
 from CRABClient.UserUtilities import config, getUsernameFromSiteDB
 
 config = Configuration()
-job_name = "DijetSkim_DATASET_1_0_1"
+job_name = "DijetSkim_VERSION"
 
 config.section_("General")
 config.General.requestName = job_name
@@ -30,7 +30,7 @@ config.section_("Data")
 #config.Data.inputDataset = '/JetHT/Run2018C-Nano14Dec2018-v1/NANOAOD'
 #config.Data.inputDBS = 'phys03'
 config.Data.inputDBS = 'global'
-config.Data.splitting = 'FileBased'
+config.Data.splitting = 'Auto'
 #config.Data.splitting = 'EventAwareLumiBased'
 config.Data.unitsPerJob = 4
 #config.Data.totalUnits = 10

@@ -273,7 +273,7 @@ def make_cfg(year, dataset, version):
 
 	cfg_path = os.path.expandvars("$CMSSW_BASE/src/PhysicsTools/DijetSkimmer/skim/crab/skim_{}_{}_cfg.py".format(dataset_short, year))
 	if "test" in version:
-		cfg_path.replace("_cfg.py", "_test_cfg.py")
+		cfg_path.replace("cfg.py", "test_cfg.py")
 	print cfg_path
 	with open(cfg_path, 'w') as f_out:
 		with open("skim_cfg_base.py", 'r') as f_in:
@@ -312,4 +312,4 @@ if __name__ == "__main__":
 
 
 	# Make a test cfg
-	make_cfg(year=year, dataset="/JetHT/Run2018A-Nano14Dec2018-v1/NANOAOD", version="test35")
+	make_cfg(year=year, dataset="/JetHT/Run2018A-Nano14Dec2018-v1/NANOAOD", version="test37")

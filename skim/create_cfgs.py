@@ -258,7 +258,7 @@ submit_script = open(os.path.expandvars("$CMSSW_BASE/src/PhysicsTools/DijetSkimm
 resubmit_script = open(os.path.expandvars("$CMSSW_BASE/src/PhysicsTools/DijetSkimmer/skim/submit.sh"), "w")
 status_script = open(os.path.expandvars("$CMSSW_BASE/src/PhysicsTools/DijetSkimmer/skim/submit.sh"), "w")
 
-for year in year:
+for year in [2016, 2017, 2018]:
 	for dataset in datasets[year]:
 		# For the cfg filename, create a string uniquely representing each dataset above
 		dataset_short = dataset.split("/")[1]

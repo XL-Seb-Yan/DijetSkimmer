@@ -301,20 +301,13 @@ for year in [2016, 2017, 2018]:
 		submit_script.write("crab submit -c {}".format(cfg_path))
 
 
-	# Make a test CFG as well
-	test_dataset = "/JetHT/Run2017C-Nano14Dec2018-v1/NANOAOD"
-	with open("crab/skim_test_jetht_cfg.py", 'w') as f_out:
-		with open("skim_cfg_base.py", 'r') as f_in:
-			for line in f_in:
-				if "config.JobType.scriptArgs" in line:
-					if "JetHT" in test_dataset:
-						f_out.write("config.JobType.scriptArgs = [\"--source=data\", \"--dataset=JetHT\", \"--year={}\"]\n".format(year))
-					elif "SingleMuon" in test_dataset:
-						f_out.write("config.JobType.scriptArgs = [\"--source=data\", \"--dataset=SingleMuon\", \"--year={}\"]\n".format(year))
-					else:
-						f_out.write("config.JobType.scriptArgs = [\"--source=mc\", \"--year={}\"]\n".format(year))
-				elif "job_name = " in line:
-					f_out.write("job_name = \"DijetSkim_test34\"\n")
-				else:
-					f_out.write(line)
-		f_out.write("config.Data.inputDataset = '{}'".format(test_dataset))
+# Make a test CFG as well
+test_template = os.path.expandvars("$CMSSW_BASE/src/PhysicsTools/DijetSkimmer/skim/crab/skim_JetHTRun2016D_2016_cfg.py")
+with open(test_template, "r") as test_cfg_template:
+	with open(test_template.replace("skim_JetHTRun2016D_2016_cfg.py", "skim_test_cfg.py"), "w") as test_cfg:
+		for line in test_cfg_template:
+			if "job_name" in line:
+				test_cfg.write("job_name = \"DijetSkim_test35\"\n")
+			else:
+				test_cfg.write(line)
+				

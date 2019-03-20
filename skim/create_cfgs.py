@@ -274,6 +274,7 @@ def make_cfg(year, dataset, version):
 	cfg_path = os.path.expandvars("$CMSSW_BASE/src/PhysicsTools/DijetSkimmer/skim/crab/skim_{}_{}_cfg.py".format(dataset_short, year))
 	if "test" in version:
 		cfg_path.replace("_cfg.py", "_test_cfg.py")
+	print cfg_path
 	with open(cfg_path, 'w') as f_out:
 		with open("skim_cfg_base.py", 'r') as f_in:
 			for line in f_in:

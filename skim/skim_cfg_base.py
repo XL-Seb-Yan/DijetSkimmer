@@ -30,7 +30,7 @@ config.section_("Data")
 #config.Data.inputDataset = '/JetHT/Run2018C-Nano14Dec2018-v1/NANOAOD'
 #config.Data.inputDBS = 'phys03'
 config.Data.inputDBS = 'global'
-config.Data.splitting = 'Auto'
+config.Data.splitting = 'Automatic'
 #config.Data.splitting = 'EventAwareLumiBased'
 config.Data.unitsPerJob = 4
 #config.Data.totalUnits = 10

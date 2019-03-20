@@ -306,8 +306,7 @@ test_template = os.path.expandvars("$CMSSW_BASE/src/PhysicsTools/DijetSkimmer/sk
 with open(test_template, "r") as test_cfg_template:
 	with open(test_template.replace("skim_JetHTRun2016D_2016_cfg.py", "skim_test_cfg.py"), "w") as test_cfg:
 		for line in test_cfg_template:
-			if "job_name" in line:
+			if "job_name = " in line:
 				test_cfg.write("job_name = \"DijetSkim_test35\"\n")
 			else:
 				test_cfg.write(line)
-				

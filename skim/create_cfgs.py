@@ -250,63 +250,63 @@ datasets = {
 	]
 }
 
-import re
-re_ver = re.compile("(?P<version>ver\d)")
-re_year_data = re.compile("Run(?P<year>\d\d\d\d)")
+def make_cfg(year, dataset, version):
+	# For the cfg filename, create a string uniquely representing each dataset above
+	dataset_short = dataset.split("/")[1]
+	for remove_str in remove_strs:
+		dataset_short.replace(remove_str, "")
 
-submit_script = open(os.path.expandvars("$CMSSW_BASE/src/PhysicsTools/DijetSkimmer/skim/submit.sh"), "w")
-resubmit_script = open(os.path.expandvars("$CMSSW_BASE/src/PhysicsTools/DijetSkimmer/skim/submit.sh"), "w")
-status_script = open(os.path.expandvars("$CMSSW_BASE/src/PhysicsTools/DijetSkimmer/skim/submit.sh"), "w")
+	# For data, add the run-period to the short name
+	if "JetHT" in dataset_short or "SingleMuon" in dataset_short:
+		second_piece = dataset.split("/")[2]
+		print second_piece
+		dataset_short += second_piece[:8]
+		re_ver_match = re_ver.search(second_piece)
+		if re_ver_match:
+			dataset_short += re_ver_match.group("version")
+		re_year_match = re_year_data.search(dataset)
+		if re_year_match:
+			year = re_year_match.group("year")
+		else:
+			print "ERROR : Failed to regex year out of {}".format(dataset)
+			sys.exit(1)
 
-remove_strs = ["_TuneCP5", "_TuneCUETP8M1", "_13TeV", "_pythia8", "_madgraph", "-pythia8", "-madgraph"]
-
-for year in [2016, 2017, 2018]:
-	for dataset in datasets[year]:
-		# For the cfg filename, create a string uniquely representing each dataset above
-		dataset_short = dataset.split("/")[1]
-		for remove_str in remove_strs:
-			dataset_short.replace(remove_str, "")
-
-		# For data, add the run-period to the short name
-		if "JetHT" in dataset_short or "SingleMuon" in dataset_short:
-			second_piece = dataset.split("/")[2]
-			print second_piece
-			dataset_short += second_piece[:8]
-			re_ver_match = re_ver.search(second_piece)
-			if re_ver_match:
-				dataset_short += re_ver_match.group("version")
-			re_year_match = re_year_data.search(dataset)
-			if re_year_match:
-				year = re_year_match.group("year")
-			else:
-				print "ERROR : Failed to regex year out of {}".format(dataset)
-				sys.exit(1)
-
-		cfg_path = os.path.expandvars("$CMSSW_BASE/src/PhysicsTools/DijetSkimmer/skim/crab/skim_{}_{}_cfg.py".format(dataset_short, year))
-		with open(cfg_path, 'w') as f_out:
-			with open("skim_cfg_base.py", 'r') as f_in:
-				for line in f_in:
-					if "config.JobType.scriptArgs" in line:
-						if "JetHT" in dataset_short:
-							f_out.write("config.JobType.scriptArgs = [\"--source=data\", \"--dataset=JetHT\", \"--year={}\"]\n".format(year))
-						elif "SingleMuon" in dataset_short:
-							f_out.write("config.JobType.scriptArgs = [\"--source=data\", \"--dataset=SingleMuon\", \"--year={}\"]\n".format(year))
-						else:
-							f_out.write("config.JobType.scriptArgs = [\"--source=mc\", \"--year={}\"]\n".format(year))
-					elif "job_name = " in line:
-						f_out.write(line.replace("DATASET", dataset_short).replace("VERSION", version))
+	cfg_path = os.path.expandvars("$CMSSW_BASE/src/PhysicsTools/DijetSkimmer/skim/crab/skim_{}_{}_cfg.py".format(dataset_short, year))
+	with open(cfg_path, 'w') as f_out:
+		with open("skim_cfg_base.py", 'r') as f_in:
+			for line in f_in:
+				if "config.JobType.scriptArgs" in line:
+					if "JetHT" in dataset_short:
+						f_out.write("config.JobType.scriptArgs = [\"--source=data\", \"--dataset=JetHT\", \"--year={}\"]\n".format(year))
+					elif "SingleMuon" in dataset_short:
+						f_out.write("config.JobType.scriptArgs = [\"--source=data\", \"--dataset=SingleMuon\", \"--year={}\"]\n".format(year))
 					else:
-						f_out.write(line)
-			f_out.write("config.Data.inputDataset = '{}'".format(dataset))
-		submit_script.write("crab submit -c {}".format(cfg_path))
+						f_out.write("config.JobType.scriptArgs = [\"--source=mc\", \"--year={}\"]\n".format(year))
+				elif "job_name = " in line:
+					f_out.write(line.replace("DATASET", dataset_short).replace("VERSION", version))
+				elif "config.Data.outLFNDirBase =" in line:
+					f_out.write(line.replace("VERSION", version))
+				else:
+					f_out.write(line)
+		f_out.write("config.Data.inputDataset = '{}'".format(dataset))
+	return cfg_path
+
+if __name__ == "__main__":
+	import re
+	re_ver = re.compile("(?P<version>ver\d)")
+	re_year_data = re.compile("Run(?P<year>\d\d\d\d)")
+
+	submit_script = open(os.path.expandvars("$CMSSW_BASE/src/PhysicsTools/DijetSkimmer/skim/submit.sh"), "w")
+	resubmit_script = open(os.path.expandvars("$CMSSW_BASE/src/PhysicsTools/DijetSkimmer/skim/submit.sh"), "w")
+	status_script = open(os.path.expandvars("$CMSSW_BASE/src/PhysicsTools/DijetSkimmer/skim/submit.sh"), "w")
+
+	remove_strs = ["_TuneCP5", "_TuneCUETP8M1", "_13TeV", "_pythia8", "_madgraph", "-pythia8", "-madgraph"]
+
+	for year in [2016, 2017, 2018]:
+		for dataset in datasets[year]:
+			cfg_path = make_cfg(year=year, dataset=dataset, version=version)
+			submit_script.write("crab submit -c {}".format(cfg_path))
 
 
-# Make a test CFG as well
-test_template = os.path.expandvars("$CMSSW_BASE/src/PhysicsTools/DijetSkimmer/skim/crab/skim_JetHTRun2016D_2016_cfg.py")
-with open(test_template, "r") as test_cfg_template:
-	with open(test_template.replace("skim_JetHTRun2016D_2016_cfg.py", "skim_test_cfg.py"), "w") as test_cfg:
-		for line in test_cfg_template:
-			if "job_name = " in line:
-				test_cfg.write("job_name = \"DijetSkim_test35\"\n")
-			else:
-				test_cfg.write(line)
+	# Make a test cfg
+	make_cfg(year=year, dataset="/JetHT/Run2018A-Nano14Dec2018-v1/NANOAOD", version="test35")

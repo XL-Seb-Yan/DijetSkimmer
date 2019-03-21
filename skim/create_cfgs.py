@@ -286,12 +286,8 @@ def make_cfg(year, dataset, version):
 						f_out.write("config.JobType.scriptArgs = [\"--source=data\", \"--dataset=SingleMuon\", \"--year={}\"]\n".format(year))
 					else:
 						f_out.write("config.JobType.scriptArgs = [\"--source=mc\", \"--year={}\"]\n".format(year))
-				elif "job_name = " in line:
-					f_out.write(line.replace("DATASET", dataset_short).replace("VERSION", version))
-				elif "config.Data.outLFNDirBase =" in line:
-					f_out.write(line.replace("VERSION", version))
 				else:
-					f_out.write(line)
+					f_out.write(line.replace("DATASET", dataset_short).replace("VERSION", version).replace("YEAR", str(year)))
 		f_out.write("config.Data.inputDataset = '{}'".format(dataset))
 	return cfg_path
 

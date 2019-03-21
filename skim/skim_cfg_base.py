@@ -34,9 +34,9 @@ config.Data.splitting = 'FileBased'
 config.Data.unitsPerJob = 4
 #config.Data.totalUnits = 10
 config.JobType.allowUndistributedCMSSW = True
-config.Data.outLFNDirBase = '/store/user/{}/DijetNanoSkim/VERSION/'.format(getUsernameFromSiteDB())
+config.Data.outLFNDirBase = '/store/user/{}/DijetNanoSkim/VERSION/YEAR/'.format(getUsernameFromSiteDB())
 config.Data.publication = False
-config.Data.outputDatasetTag = job_name
+config.Data.outputDatasetTag = "DATASET"
 #config.Data.ignoreLocality = True
 
 config.section_("Site")

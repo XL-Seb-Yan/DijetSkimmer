@@ -305,7 +305,7 @@ if __name__ == "__main__":
 	for year in [2016, 2017, 2018]:
 		for dataset in datasets[year]:
 			cfg_path = make_cfg(year=year, dataset=dataset, version=version)
-			submit_script.write("crab submit -c {}".format(cfg_path))
+			submit_script.write("crab submit -c {}\n".format(cfg_path))
 
 
 	# Make a test cfg

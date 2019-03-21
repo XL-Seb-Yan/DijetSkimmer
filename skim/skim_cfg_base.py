@@ -3,7 +3,7 @@ from WMCore.Configuration import Configuration
 from CRABClient.UserUtilities import config, getUsernameFromSiteDB
 
 config = Configuration()
-job_name = "DijetSkim_DATASET_VERSION_YEAR"
+job_name = "DijetSkim_DATASET_YEAR_VERSION"
 
 config.section_("General")
 config.General.requestName = job_name

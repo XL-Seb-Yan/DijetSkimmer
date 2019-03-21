@@ -314,3 +314,4 @@ if __name__ == "__main__":
 
 	# Make a test cfg
 	make_cfg(year=year, dataset="/JetHT/Run2018A-Nano14Dec2018-v1/NANOAOD", version="test37")
+	make_cfg(year=year, dataset="/QCD_Pt_3200toInf_TuneCP5_13TeV_pythia8/RunIIFall17NanoAODv4-PU2017_12Apr2018_Nano14Dec2018_102X_mc2017_realistic_v6-v1/NANOAODSIM", version="test37")

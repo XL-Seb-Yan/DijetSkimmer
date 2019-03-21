@@ -57,13 +57,14 @@ class DijetSkimmer(Module):
 			hist.Write()
 
 	def beginFile(self, inputFile, outputFile, inputTree, wrappedOutputTree):
-		# Make a list of triggers that are actually present in the TTree
-		self._trigger_list_file = []
-		for trigger_name in self._trigger_list:
-			if inputTree.GetBranch(trigger_name):
-				self._trigger_list_file.append(trigger_name)
-			else:
-				print "[DijetSkimmer::beginFile] WARNING : Trigger {} is not present in the input ntuple! Skipping this trigger.".format(trigger_name)
+		if self._source == Source.kDATA:
+			# Make a list of triggers that are actually present in the TTree
+			self._trigger_list_file = []
+			for trigger_name in self._trigger_list:
+				if inputTree.GetBranch(trigger_name):
+					self._trigger_list_file.append(trigger_name)
+				else:
+					print "[DijetSkimmer::beginFile] WARNING : Trigger {} is not present in the input ntuple! Skipping this trigger.".format(trigger_name)
 
 	def endFile(self, inputFile, outputFile, inputTree, wrappedOutputTree):
 		pass

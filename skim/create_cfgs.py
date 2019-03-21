@@ -1,11 +1,13 @@
 import os
 import sys
 
-version = "1_1_1" 
+version = "1_1_2" 
 # 1_0_1 
 #	- first try. job name parsing removed too much of the name, resulting in 2016/2017/2018 name clashes.
 # 1_1_1
 # 	- Try running over many datasets in the same job, so they end up in e.g. NanoSkim_v<version>/<dataset>/...
+# 1_1_2
+# 	- Missing trigger fix didn't work, try again.
 datasets = {
 	2016:[
 		"/JetHT/Run2016B_ver1-Nano14Dec2018_ver1-v1/NANOAOD",

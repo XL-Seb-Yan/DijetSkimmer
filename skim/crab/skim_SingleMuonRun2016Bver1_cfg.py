@@ -14,7 +14,7 @@ config.JobType.pluginName = 'Analysis'
 # Setup the custom executable
 config.JobType.psetName = os.path.expandvars('$CMSSW_BASE/src/PhysicsTools/DijetSkimmer/skim/PSet.py') # CRAB modifies this file to contain the input files and lumis
 config.JobType.scriptExe = os.path.expandvars('$CMSSW_BASE/src/PhysicsTools/DijetSkimmer/skim/crab_shell.sh') # CRAB then calls scriptExe jobId <scriptArgs>
-config.JobType.scriptArgs = ["source=data", "dataset=SingleMuon", "year=2016"]
+config.JobType.scriptArgs = ["--source=data", "--dataset=SingleMuon", "--year=2016"]
 config.JobType.inputFiles = [
 	os.path.expandvars('$CMSSW_BASE/src/PhysicsTools/DijetSkimmer/skim/crab_meat.py'), 
 	os.path.expandvars('$CMSSW_BASE/src/PhysicsTools/NanoAODTools/scripts/haddnano.py'), #hadd nano will not be needed once nano tools are in cmssw

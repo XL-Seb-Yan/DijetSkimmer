@@ -1,7 +1,7 @@
 import os
 import sys
 
-version = "1_1_2" 
+version = "1_1_3" 
 # 1_0_1 
 #	- first try. job name parsing removed too much of the name, resulting in 2016/2017/2018 name clashes.
 # 1_1_1

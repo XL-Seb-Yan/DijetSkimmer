@@ -104,7 +104,7 @@ class DijetSkimmer(Module):
 
 	def getTriggerResult(self, event):
 		trigger_result = 0
-		for i, trigger in enumerate(self._trigger_list):
+		for i, trigger in enumerate(self._trigger_list_file):
 			trigger_result |= getattr(event, trigger) << i
 		return trigger_result
 

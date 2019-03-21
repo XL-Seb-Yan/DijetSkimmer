@@ -1,13 +1,17 @@
 import os
 import sys
 
-version = "1_1_3" 
+version = "1_1_4" 
 # 1_0_1 
 #	- first try. job name parsing removed too much of the name, resulting in 2016/2017/2018 name clashes.
 # 1_1_1
 # 	- Try running over many datasets in the same job, so they end up in e.g. NanoSkim_v<version>/<dataset>/...
 # 1_1_2
 # 	- Missing trigger fix didn't work, try again.
+# 1_1_3
+#   - git pulled while 1_1_1 submission was still ongoing.
+# 1_1_4
+# 	- request names clashed in 1_1_3 
 datasets = {
 	2016:[
 		"/JetHT/Run2016B_ver1-Nano14Dec2018_ver1-v1/NANOAOD",
@@ -298,9 +302,9 @@ if __name__ == "__main__":
 	re_ver = re.compile("(?P<version>ver\d)")
 	re_year_data = re.compile("Run(?P<year>\d\d\d\d)")
 
-	submit_script = open(os.path.expandvars("$CMSSW_BASE/src/PhysicsTools/DijetSkimmer/skim/submit.sh"), "w")
-	resubmit_script = open(os.path.expandvars("$CMSSW_BASE/src/PhysicsTools/DijetSkimmer/skim/submit.sh"), "w")
-	status_script = open(os.path.expandvars("$CMSSW_BASE/src/PhysicsTools/DijetSkimmer/skim/submit.sh"), "w")
+	submit_script = open(os.path.expandvars("$CMSSW_BASE/src/PhysicsTools/DijetSkimmer/skim/crab/submit.sh"), "w")
+	resubmit_script = open(os.path.expandvars("$CMSSW_BASE/src/PhysicsTools/DijetSkimmer/skim/crab/submit.sh"), "w")
+	status_script = open(os.path.expandvars("$CMSSW_BASE/src/PhysicsTools/DijetSkimmer/skim/crab/submit.sh"), "w")
 
 	remove_strs = ["_TuneCP5", "_TuneCUETP8M1", "_13TeV", "_pythia8", "_madgraph", "-pythia8", "-madgraph"]
 

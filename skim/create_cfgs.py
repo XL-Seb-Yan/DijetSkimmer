@@ -1,7 +1,7 @@
 import os
 import sys
 
-version = "1_1_4" 
+version = "1_1_5" 
 # 1_0_1 
 #	- first try. job name parsing removed too much of the name, resulting in 2016/2017/2018 name clashes.
 # 1_1_1
@@ -11,7 +11,9 @@ version = "1_1_4"
 # 1_1_3
 #   - git pulled while 1_1_1 submission was still ongoing.
 # 1_1_4
-# 	- request names clashed in 1_1_3 
+# 	- request names clashed in 1_1_3
+# 1_1_5
+# 	- Some MC samples have "ext#" in the second part. Include this in the job name. 
 datasets = {
 	2016:[
 		"/JetHT/Run2016B_ver1-Nano14Dec2018_ver1-v1/NANOAOD",
@@ -256,15 +258,20 @@ datasets = {
 	]
 }
 
+import re
+re_ver = re.compile("(?P<version>ver\d)")
+re_year_data = re.compile("Run(?P<year>\d\d\d\d)")
+re_ext = re.compile("(?P<ext>ext\d)")
+
 def make_cfg(year, dataset, version):
 	# For the cfg filename, create a string uniquely representing each dataset above
 	dataset_short = dataset.split("/")[1]
 	for remove_str in remove_strs:
 		dataset_short = dataset_short.replace(remove_str, "")
 
+	second_piece = dataset.split("/")[2]
 	# For data, add the run-period to the short name
 	if "JetHT" in dataset_short or "SingleMuon" in dataset_short:
-		second_piece = dataset.split("/")[2]
 		print second_piece
 		dataset_short += second_piece[:8]
 		re_ver_match = re_ver.search(second_piece)
@@ -276,6 +283,12 @@ def make_cfg(year, dataset, version):
 		else:
 			print "ERROR : Failed to regex year out of {}".format(dataset)
 			sys.exit(1)
+	else:
+		# Look for "ext#" in second part
+		re_ext_match = re_ext.search(second_piece)
+		if re_ext_match:
+			ext_str = re_ext_match.group("ext")
+			dataset_short += ext_str
 
 	cfg_path = os.path.expandvars("$CMSSW_BASE/src/PhysicsTools/DijetSkimmer/skim/crab/skim_{}_{}_cfg.py".format(dataset_short, year))
 	print version
@@ -298,9 +311,6 @@ def make_cfg(year, dataset, version):
 	return cfg_path
 
 if __name__ == "__main__":
-	import re
-	re_ver = re.compile("(?P<version>ver\d)")
-	re_year_data = re.compile("Run(?P<year>\d\d\d\d)")
 
 	submit_script = open(os.path.expandvars("$CMSSW_BASE/src/PhysicsTools/DijetSkimmer/skim/crab/submit.sh"), "w")
 	resubmit_script = open(os.path.expandvars("$CMSSW_BASE/src/PhysicsTools/DijetSkimmer/skim/crab/submit.sh"), "w")

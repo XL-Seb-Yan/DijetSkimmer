@@ -1,7 +1,7 @@
 import os
 import sys
 
-version = "1_1_5" 
+version = "1_1_6" 
 # 1_0_1 
 #	- first try. job name parsing removed too much of the name, resulting in 2016/2017/2018 name clashes.
 # 1_1_1
@@ -14,6 +14,8 @@ version = "1_1_5"
 # 	- request names clashed in 1_1_3
 # 1_1_5
 # 	- Some MC samples have "ext#" in the second part. Include this in the job name. 
+# 1_1_6
+#   - Less files per job for MC, since the skim efficiency is basically 100%
 datasets = {
 	2016:[
 		"/JetHT/Run2016B_ver1-Nano14Dec2018_ver1-v1/NANOAOD",
@@ -305,6 +307,11 @@ def make_cfg(year, dataset, version):
 						f_out.write("config.JobType.scriptArgs = [\"--source=data\", \"--dataset=SingleMuon\", \"--year={}\"]\n".format(year))
 					else:
 						f_out.write("config.JobType.scriptArgs = [\"--source=mc\", \"--year={}\"]\n".format(year))
+				elif "unitsPerJob" in line:
+					if not ("JetHT" in dataset_short or "SingleMuon" in dataset_short):
+						f_out.write("config.Data.unitsPerJob = 1\n")
+					else:
+						f_out.write("config.Data.unitsPerJob = 4\n")
 				else:
 					f_out.write(line.replace("DATASET", dataset_short).replace("VERSION", version).replace("YEAR", str(year)))
 		f_out.write("config.Data.inputDataset = '{}'".format(dataset))

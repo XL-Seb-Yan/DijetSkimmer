@@ -1,0 +1,9 @@
+# skim_version = "vTEST1" # Testing YAML-based submission
+#skim_version = "v2_0_0" # First bulk submission for YAML
+#skim_version = "v2_0_1" # Messed up the subfolder naming, some clobbering occurred
+#skim_version = "v2_0_2" # Save FsrPhoton and GenPart
+#skim_version = "v2_0_3" # Submission got screwed up, redoing
+#skim_version = "v2_0_4" # Just keep all branches starting with "Gen"
+#skim_version = "v2_0_6" # Once again, submission got screwed up. Redoing.
+#skim_version = "v2_0_7" # Once again, submission got screwed up. Redoing.
+skim_version = "v2_0_8" # Redo ZPrimeTo3Gluon to save GenModel branches

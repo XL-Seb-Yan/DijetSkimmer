@@ -42,5 +42,7 @@ keep GenMET*
 keep Pileup*
 keep nGenDressedLepton
 keep GenDressedLepton*
+keep nGen*
+keep Gen*
 
 

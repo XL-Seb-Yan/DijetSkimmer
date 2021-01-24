@@ -21,13 +21,16 @@ mv $CMSSW_BASE/lib/ hide
 mv $CMSSW_BASE/src/ hide
 #mv $CMSSW_BASE/module/ hide
 mv $CMSSW_BASE/python/ hide
+mv python $CMSSW_BASE/python
 mv lib $CMSSW_BASE/lib
 mv src $CMSSW_BASE/src
 #mv module $CMSSW_BASE/module
-mv python $CMSSW_BASE/python
 
 cd $CMSSW_BASE/src
-cmsenv
+rm -f $CMSSW_BASE/src/PhysicsTools/DijetSkimmer/python/__init__.py
+rm -f $CMSSW_BASE/src/PhysicsTools/NanoAODTools/python/__init__.py
+rm -f $CMSSW_BASE/src/PhysicsTools/NanoAODTools/python/postprocessing/__init__.py
+eval `scramv1 runtime -sh`
 scram b -j8
 cd -
 
@@ -44,6 +47,14 @@ python crab_meat.py "$@" #--haddFileName $HADDFILENAME
 hadd hists.root hists_*.root
 
 #cp "nanoskim_$1.root" nanoskim.root
+echo "Python path:"
+python -c "import sys; print sys.path;"
 ls -l
+echo "lsing CMSSW cfipython:"
+ls -lRth $CMSSW_BASE/cfipython/slc7_amd64_gcc700
+echo "lsing CMSSW python:"
+ls -lRth $CMSSW_BASE/python
+echo "lsing python:"
+ls -lRth python
 echo "jkl;"
 fi

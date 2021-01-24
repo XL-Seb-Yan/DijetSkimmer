@@ -4,7 +4,7 @@ import ROOT
 ROOT.PyConfig.IgnoreCommandLineOptions = True
 
 from PhysicsTools.NanoAODTools.postprocessing.framework.datamodel import Collection,Object
-from PhysicsTools.NanoAODTools.postprocessing.framework.module import Module
+from PhysicsTools.NanoAODTools.postprocessing.framework.eventloop import Module
 from PhysicsTools.NanoAODTools.postprocessing.tools import *
 from PhysicsTools.NanoAODTools.postprocessing.framework.enums import *
 
@@ -16,7 +16,7 @@ class DijetSkimmer(Module):
 		self._source = source
 		self._dataset = dataset
 		if hist_file:
-			self.addHistogramFile(hist_file)
+			self._hist_file = ROOT.TFile(hist_file, "RECREATE")
 
 	def beginJob(self):
 		# Histograms

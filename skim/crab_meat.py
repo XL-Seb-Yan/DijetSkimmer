@@ -21,54 +21,71 @@ print "crab_meat arguments:"
 print args
 
 if args.source == "data":
-	branch_list_file = "skim_branches_data.txt"
-	data_source = Source.kDATA
+    branch_list_file = "skim_branches_data.txt"
+    data_source = Source.kDATA
 elif args.source == "mc":
-	branch_list_file = "skim_branches_mc.txt"
-	data_source = Source.kMC
+    branch_list_file = "skim_branches_mc.txt"
+    data_source = Source.kMC
 else:
-	print "ERROR : --source data or --source mc is mandatory"
-	sys.exit(1)
+    print "ERROR : --source data or --source mc is mandatory"
+    sys.exit(1)
 
 if args.dataset == "JetHT":
-	dataset = Dataset.kJetHT
+    dataset = Dataset.kJetHT
 elif args.dataset == "SingleMuon":
-	dataset = Dataset.kSingleMuon
+    dataset = Dataset.kSingleMuon
 else:
-	dataset = Dataset.kNone
+    dataset = Dataset.kNone
 
 if args.year == 2016:
-	year = Year.k2016
+    year = Year.k2016
 elif args.year == 2017:
-	year = Year.k2017
+    year = Year.k2017
 elif args.year == 2018:
-	year = Year.k2018
+    year = Year.k2018
 else:
-	print "ERROR : --year is mandatory."
-	sys.exit(1)
+    print "ERROR : --year is mandatory."
+    sys.exit(1)
+
+if data_source == Source.kMC:
+    jme_unc_provider = jetmetUncertaintiesProducer(
+        era=year, 
+        globalTag=jec_global_tags[year],
+        jesUncertainties=["Total"], 
+        jetType=JetType.kAK4PFchs, 
+        redoJEC=False, 
+        noGroom=False)
+
+if data_source == Source.kDATA:
+    modules_list = [DijetSkimmer(year=year, source=data_source, dataset=dataset, hist_file="./hists_{}.root".format(args.jobID))]
+else:
+    modules_list = [jme_unc_provider, DijetSkimmer(year=year, source=data_source, dataset=dataset, hist_file="./hists_{}.root".format(args.jobID))]
+
+print "Printing modules_list:"
+print modules_list
 
 if args.jobID == -1:
-	# Local test
-	skimmer = PostProcessor(outputDir=".",
-		inputFiles=["root://cmsxrootd.fnal.gov//store/data/Run2017C/JetHT/NANOAOD/Nano14Dec2018-v1/80000/25DF8860-C198-2947-8BCB-60A43CCA34EF.root"],
-		cut=None,
-		branchsel=branch_list_file,
-		outputbranchsel=branch_list_file,
-		modules=[DijetSkimmer(year=year, source=data_source, dataset=dataset, hist_file="./hists_{}.root".format(args.jobID))],
-		provenance=True,
-		fwkJobReport=True,
-		haddFileName=args.haddFileName)
+    # Local test
+    skimmer = PostProcessor(outputDir=".",
+        inputFiles=["root://cmsxrootd.fnal.gov//store/data/Run2017C/JetHT/NANOAOD/Nano14Dec2018-v1/80000/25DF8860-C198-2947-8BCB-60A43CCA34EF.root"],
+        cut=None,
+        branchsel=branch_list_file,
+        outputbranchsel=branch_list_file,
+        modules=modules_list,
+        provenance=True,
+        fwkJobReport=True,
+        haddFileName=args.haddFileName)
 else:
-	skimmer = PostProcessor(outputDir=".",
-		inputFiles=inputFiles(),
-		cut=None,
-		branchsel=branch_list_file,
-		outputbranchsel=branch_list_file,
-		modules=[DijetSkimmer(year=year, source=data_source, dataset=dataset, hist_file="./hists_{}.root".format(args.jobID))],
-		provenance=True,
-		fwkJobReport=True,
-		haddFileName=args.haddFileName)
-skimmer.run(maxEvents=-1)
+    skimmer = PostProcessor(outputDir=".",
+        inputFiles=inputFiles(),
+        cut=None,
+        branchsel=branch_list_file,
+        outputbranchsel=branch_list_file,
+        modules=modules_list,
+        provenance=True,
+        fwkJobReport=True,
+        haddFileName=args.haddFileName)
+skimmer.run()
 
 
 os.system("ls -lR")

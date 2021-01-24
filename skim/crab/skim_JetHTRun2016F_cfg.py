@@ -24,7 +24,7 @@ config.JobType.inputFiles = [
 	#os.path.expandvars('$CMSSW_BASE/src/PhysicsTools/DijetSkimmer/skim/FrameworkJobReport.xml'),
 	]
 config.JobType.outputFiles = ["nanoskim.root", "hists.root"]
-config.JobType.sendPythonFolder	 = True
+config.JobType.sendPythonFolder	 = False
 config.JobType.allowUndistributedCMSSW = True
 config.section_("Data")
 #config.Data.inputDataset = '/JetHT/Run2018C-Nano14Dec2018-v1/NANOAOD'

@@ -51,6 +51,12 @@ if __name__ == '__main__':
 
                 isMC = info['isMC']
                 common_branch = 'mc' if isMC else 'data'
+                reco_version = info.get("reco_version",
+                                        common[common_branch].get("reco_version", None))
+                if reco_version == "UL":
+                    production_tag = "{}_UL".format(skim_version)
+                else:
+                    production_tag = skim_version
 
                 this_config = config()
 
@@ -106,9 +112,9 @@ if __name__ == '__main__':
 
                 this_config.section_('Data')
                 this_config.Data.publication = False
-                this_config.Data.outLFNDirBase = '/store/user/{username}/DijetSkim/{skim_version}/{sample}'.format(
+                this_config.Data.outLFNDirBase = '/store/user/{username}/DijetSkim/{production_tag}/{sample}'.format(
                                                     username=getUsernameFromCRIC(), 
-                                                    skim_version=skim_version,
+                                                    production_tag=production_tag,
                                                     sample=sample)
                 this_config.Data.outputDatasetTag = name
                 # Outputs land at /store/user/dryu/DijetSkim/vX_Y_Z/sample/subsample

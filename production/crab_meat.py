@@ -7,10 +7,11 @@ import sys
 #import PhysicsTools.NanoAODTools.postprocessing.framework
 #import PhysicsTools.NanoAODTools.postprocessing.framework.postprocessor
 from PhysicsTools.NanoAODTools.postprocessing.framework.postprocessor import PostProcessor
-from PhysicsTools.NanoAODTools.postprocessing.framework.enums import *
+#from PhysicsTools.NanoAODTools.postprocessing.framework.enums import *
 #from PhysicsTools.NanoAODTools.postprocessing.modules.jme.jecUncertainties import jec_global_tags, jecUncertProducerCpp
 from PhysicsTools.NanoAODTools.postprocessing.modules.jme.jetmetHelperRun2 import createJMECorrector
-from  PhysicsTools.DijetSkimmer.dijet_skimmer import DijetSkimmer, Year, Source, Dataset
+from  PhysicsTools.DijetSkimmer.dijet_skimmer import DijetSkimmer
+from  PhysicsTools.DijetSkimmer.enums import *
 
 import argparse
 parser = argparse.ArgumentParser(description="Run a skim job")
@@ -52,7 +53,9 @@ else:
     sys.exit(1)
 
 if data_source == Source.kMC:
-     jme_corrector = createJMECorrector(isMC=True, dataYear=args.year, applyHEMfix=(args.year==2018))  
+     jme_corrector = createJMECorrector(isMC=True,
+                                          dataYear=args.year,
+                                          applyHEMfix=(args.year==2018))  
 
 if data_source == Source.kDATA:
     modules_list = [DijetSkimmer(year=year, source=data_source, dataset=dataset, hist_file="./hists_{}.root".format(args.jobID))]

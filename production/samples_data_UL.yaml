@@ -1,5 +1,6 @@
 common:
   data:
+    reco_version: UL
     splitting: FileBased
     unitsPerJob: 3
     globaltag: 106X_dataRun2_v32

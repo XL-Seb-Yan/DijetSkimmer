@@ -1,25 +1,19 @@
-common:
-  data:
-    splitting: FileBased
-    unitsPerJob: 3
-    globaltag: 102X_dataRun2_v13
-
-  mc:
-    splitting: FileBased
-    unitsPerJob: 1
-    globaltag: 102X_upgrade2018_realistic_v15
+defaults:
+  isMC: True
+  reco_version: preUL
+  splitting: FileBased
+  unitsPerJob: 1
+  globaltag: 102X_upgrade2018_realistic_v15
 
 samples:
   Res1ToRes2GluTo3Glu_2017:
     year: 2017
-    isMC: True
     datasets: 
       Res1ToRes2GluTo3Glu_M1-2000_R-0p3: /Res1ToRes2GluTo3Glu_M1-2000_R-0p3_TuneCP5_13TeV-madgraph-pythia8/RunIIFall17NanoAODv7-PU2017_12Apr2018_Nano02Apr2020_102X_mc2017_realistic_v8-v1/NANOAODSIM
       Res1ToRes2GluTo3Glu_M1-500_R-0p5 : /Res1ToRes2GluTo3Glu_M1-500_R-0p5_TuneCP5_13TeV-madgraph-pythia8/RunIIFall17NanoAODv7-PU2017_12Apr2018_Nano02Apr2020_102X_mc2017_realistic_v8-v1/NANOAODSIM
 
   QCD_Pt_2018:
     year: 2018
-    isMC: True
     datasets: 
       QCD_Pt_300to470: /QCD_Pt_300to470_TuneCP5_13TeV_pythia8/RunIIAutumn18NanoAODv5-Nano1June2019_102X_upgrade2018_realistic_v19-v1/NANOAODSIM",
       QCD_Pt_470to600: /QCD_Pt_470to600_TuneCP5_13TeV_pythia8/RunIIAutumn18NanoAODv5-Nano1June2019_102X_upgrade2018_realistic_v19-v1/NANOAODSIM",

@@ -1,14 +1,10 @@
-common:
-  data:
-    reco_version: UL
-    splitting: FileBased
-    unitsPerJob: 3
-    globaltag: 106X_dataRun2_v32
+defaults:
+  isMC: False
+  reco_version: UL
+  splitting: FileBased
+  unitsPerJob: 3
+  globaltag: 106X_dataRun2_v32
 
-  mc:
-    splitting: FileBased
-    unitsPerJob: 1
-    globaltag: fake
 
 samples:
   JetHT2016: 

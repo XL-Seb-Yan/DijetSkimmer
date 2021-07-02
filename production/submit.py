@@ -28,14 +28,15 @@ if __name__ == '__main__':
             except ClientException as cle:
                 print "Failed submitting task: %s" % (cle)
 
-
     parser = ArgumentParser()
     parser.add_argument('-y', '--yaml', default = 'samples_data.yaml', help = 'File with dataset descriptions')
     args = parser.parse_args()
 
     with open(args.yaml) as f:
         doc = yaml.load(f) # Parse YAML file
-        common = doc['common'] if 'common' in doc else {'data' : {}, 'mc' : {}}
+        defaults = doc['defaults'] if 'defaults' in doc else {}
+        isMC = defaults.get("isMC")
+        print(isMC)
         
         # loop over samples
         #for sample, info in doc['samples'].iteritems():
@@ -49,10 +50,8 @@ if __name__ == '__main__':
                 dataset = info["datasets"][name]
                 print("Submitting {}".format(name))
 
-                isMC = info['isMC']
-                common_branch = 'mc' if isMC else 'data'
                 reco_version = info.get("reco_version",
-                                        common[common_branch].get("reco_version", None))
+                                        defaults.get("reco_version", None))
                 if reco_version == "UL":
                     production_tag = "{}_UL".format(skim_version)
                 else:
@@ -95,7 +94,7 @@ if __name__ == '__main__':
                 this_config.JobType.allowUndistributedCMSSW = True
                 globaltag = info.get(
                         'globaltag',
-                        common[common_branch].get('globaltag', None)
+                        defaults.get('globaltag', None)
                 )
                 
                 this_config.JobType.pyCfgParams = [
@@ -122,7 +121,7 @@ if __name__ == '__main__':
                 this_config.Data.inputDataset = dataset
                 splitting_mode = info.get(
                     "splitting", 
-                    common[common_branch].get("splitting", "Automatic")
+                    defaults.get("splitting", "Automatic")
                     )
                 if not splitting_mode in ["Automatic", "FileBased", "LumiBased"]:
                     raise ValueError("Unrecognized splitting mode: {}".format(splitting_mode))
@@ -131,16 +130,16 @@ if __name__ == '__main__':
                 if not isMC:
                         this_config.Data.lumiMask = info.get(
                                 'lumimask', 
-                                common[common_branch].get('lumimask', None)
+                                defaults.get('lumimask', None)
                         )
                 else:
                         this_config.Data.lumiMask = ''
 
-                unitsPerJob = info.get("unitsPerJob", common[common_branch].get("unitsPerJob", None))
+                unitsPerJob = info.get("unitsPerJob", defaults.get("unitsPerJob", None))
                 if unitsPerJob is not None:
                     this_config.Data.unitsPerJob = unitsPerJob
 
-                totalUnits = info.get("totalUnits", common[common_branch].get("totalUnits", None))
+                totalUnits = info.get("totalUnits", defaults.get("totalUnits", None))
                 if totalUnits is not None:
                     this_config.Data.totalUnits = totalUnits
 

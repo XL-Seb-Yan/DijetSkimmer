@@ -24,16 +24,16 @@ samples:
   #  lumimask: https://cms-service-dqm.web.cern.ch/cms-service-dqm/CAF/certification/Collisions16/13TeV/ReReco/Final/Cert_271036-284044_13TeV_ReReco_07Aug2017_Collisions16_JSON.txt
   #  isMC: False
 
-  JetHT2017:
-    year: 2017
-    datasets:
-      JetHT_Run2017B: /JetHT/Run2017B-02Apr2020-v1/NANOAOD
-      JetHT_Run2017C: /JetHT/Run2017C-02Apr2020-v1/NANOAOD
-      JetHT_Run2017D: /JetHT/Run2017D-02Apr2020-v1/NANOAOD
-      JetHT_Run2017E: /JetHT/Run2017E-02Apr2020-v1/NANOAOD
-      JetHT_Run2017F: /JetHT/Run2017F-02Apr2020-v1/NANOAOD
-    lumimask: https://cms-service-dqm.web.cern.ch/cms-service-dqm/CAF/certification/Collisions17/13TeV/ReReco/Cert_294927-306462_13TeV_EOY2017ReReco_Collisions17_JSON_v1.txt
-    isMC: False
+  #JetHT2017:
+  #  year: 2017
+  #  datasets:
+  #    JetHT_Run2017B: /JetHT/Run2017B-02Apr2020-v1/NANOAOD
+  #    JetHT_Run2017C: /JetHT/Run2017C-02Apr2020-v1/NANOAOD
+  #    JetHT_Run2017D: /JetHT/Run2017D-02Apr2020-v1/NANOAOD
+  #    JetHT_Run2017E: /JetHT/Run2017E-02Apr2020-v1/NANOAOD
+  #    JetHT_Run2017F: /JetHT/Run2017F-02Apr2020-v1/NANOAOD
+  #  lumimask: https://cms-service-dqm.web.cern.ch/cms-service-dqm/CAF/certification/Collisions17/13TeV/ReReco/Cert_294927-306462_13TeV_EOY2017ReReco_Collisions17_JSON_v1.txt
+  #  isMC: False
 
   JetHT2018:
     year: 2018
@@ -60,23 +60,23 @@ samples:
   #  lumimask: https://cms-service-dqm.web.cern.ch/cms-service-dqm/CAF/certification/Collisions16/13TeV/ReReco/Final/Cert_271036-284044_13TeV_ReReco_07Aug2017_Collisions16_JSON.txt
   #  isMC: False
 
-  SingleMuon2017:
-    year: 2017
-    datasets:
-      SingleMuon_Run2017B: /SingleMuon/Run2017B-02Apr2020-v1/NANOAOD
-      SingleMuon_Run2017C: /SingleMuon/Run2017C-02Apr2020-v1/NANOAOD
-      SingleMuon_Run2017D: /SingleMuon/Run2017D-02Apr2020-v1/NANOAOD
-      SingleMuon_Run2017E: /SingleMuon/Run2017E-02Apr2020-v1/NANOAOD
-      SingleMuon_Run2017F: /SingleMuon/Run2017F-02Apr2020-v1/NANOAOD
-    lumimask: https://cms-service-dqm.web.cern.ch/cms-service-dqm/CAF/certification/Collisions17/13TeV/ReReco/Cert_294927-306462_13TeV_EOY2017ReReco_Collisions17_JSON_v1.txt
-    isMC: False
+  #SingleMuon2017:
+  #  year: 2017
+  #  datasets:
+  #    SingleMuon_Run2017B: /SingleMuon/Run2017B-02Apr2020-v1/NANOAOD
+  #    SingleMuon_Run2017C: /SingleMuon/Run2017C-02Apr2020-v1/NANOAOD
+  #    SingleMuon_Run2017D: /SingleMuon/Run2017D-02Apr2020-v1/NANOAOD
+  #    SingleMuon_Run2017E: /SingleMuon/Run2017E-02Apr2020-v1/NANOAOD
+  #    SingleMuon_Run2017F: /SingleMuon/Run2017F-02Apr2020-v1/NANOAOD
+  #  lumimask: https://cms-service-dqm.web.cern.ch/cms-service-dqm/CAF/certification/Collisions17/13TeV/ReReco/Cert_294927-306462_13TeV_EOY2017ReReco_Collisions17_JSON_v1.txt
+  #  isMC: False
 
   SingleMuon2018:
     year: 2018
     datasets:
-      SingleMuon_Run2018A: /SingleMuon/Run2018A-02Apr2020-v1/NANOAOD
+      #SingleMuon_Run2018A: /SingleMuon/Run2018A-02Apr2020-v1/NANOAOD
       SingleMuon_Run2018B: /SingleMuon/Run2018B-02Apr2020-v1/NANOAOD
-      SingleMuon_Run2018C: /SingleMuon/Run2018C-02Apr2020-v1/NANOAOD
-      SingleMuon_Run2018D: /SingleMuon/Run2018D-02Apr2020-v1/NANOAOD
+      #SingleMuon_Run2018C: /SingleMuon/Run2018C-02Apr2020-v1/NANOAOD
+      #SingleMuon_Run2018D: /SingleMuon/Run2018D-02Apr2020-v1/NANOAOD
     lumimask : https://cms-service-dqm.web.cern.ch/cms-service-dqm/CAF/certification/Collisions18/13TeV/ReReco/Cert_314472-325175_13TeV_17SeptEarlyReReco2018ABC_PromptEraD_Collisions18_JSON.txt
     isMC: False

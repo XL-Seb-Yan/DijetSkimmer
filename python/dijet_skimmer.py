@@ -6,12 +6,18 @@ ROOT.PyConfig.IgnoreCommandLineOptions = True
 from PhysicsTools.NanoAODTools.postprocessing.framework.datamodel import Collection,Object
 from PhysicsTools.NanoAODTools.postprocessing.framework.eventloop import Module
 from PhysicsTools.NanoAODTools.postprocessing.tools import *
-from PhysicsTools.NanoAODTools.postprocessing.framework.enums import *
 
 ROOT.gSystem.Load(os.path.expandvars("$CMSSW_BASE/lib/$SCRAM_ARCH/libPhysicsToolsDijetSkimmer.so"))
 
 class DijetSkimmer(Module):
-	def __init__(self, year=Year.k2016, source=Source.kDATA, dataset=Dataset.kNone, hist_file=None):
+
+	def getTriggerResult(self, event):
+		trigger_result = 0
+		for i, trigger in enumerate(self._trigger_list_file):
+			trigger_result |= getattr(event, trigger) << i
+		return trigger_result
+
+	def __init__(self, year="UL2017", source="data", dataset="", hist_file=None):
 		self._year = year
 		self._source = source
 		self._dataset = dataset
@@ -27,25 +33,21 @@ class DijetSkimmer(Module):
 			self._histograms["TriggeredEvents"] = ROOT.TH1D("h_TriggeredEvents", "h_TriggeredEvents", 1, 0, 1)
 			self._histograms["SelectedEvents"]  = ROOT.TH1D("h_SelectedEvents", "h_SelectedEvents", 1, 0, 1)
 
-			if self._source == Source.kDATA:
+			if self._source == "data":
 				self._trigger_list = []
-				if self._dataset == Dataset.kJetHT:
-					if self._year == Year.k2016:
-						self._trigger_list = ["HLT_PFHT800", "HLT_PFHT900", "HLT_AK8PFJet450", "HLT_AK8PFJet500", "HLT_PFJet500", "HLT_CaloJet500_NoJetID"]
-					elif self._year == Year.k2017 or self._year == Year.k2018:
+				if self._dataset == "JetHT":
+					if self._year == "UL2016":
+						self._trigger_list = ["HLT_PFHT900", "HLT_AK8PFJet500", "HLT_AK8PFJet360_TrimMass30", "HLT_CaloJet500_NoJetID", "HLT_AK8PFJet450"]
+					elif self._year == "UL2017" or self._year == "UL2018":
 						self._trigger_list = ["HLT_PFHT1050", "HLT_AK8PFJet500", "HLT_AK8PFJet550", "HLT_CaloJet500_NoJetID", "HLT_CaloJet550_NoJetID", "HLT_PFJet500"]
-				elif self._dataset == Dataset.kSingleMuon:
-					if self._year == Year.k2016:
-						self._trigger_list = ["HLT_IsoMu24", "HLT_IsoTkMu24", "HLT_Mu50", "HLT_TkMu50"]
-					elif self._year == Year.k2017:
-						self._trigger_list = ["HLT_IsoMu27", "HLT_Mu50", "HLT_Mu50", "HLT_OldMu100", "HLT_TkMu100"]
-					elif self._year == Year.k2018:
-						self._trigger_list = ["HLT_IsoMu24", "HLT_Mu50", "HLT_OldMu100", "HLT_TkMu100"]
+				elif self._dataset == "SingleMuon":
+					self._trigger_list = ["HLT_Mu50"]
+					
 				self._histograms["TriggerPass"] = ROOT.TH1D("h_TriggerPass", "h_TriggerPass", len(self._trigger_list), -0.5, len(self._trigger_list) - 0.5)
  				for i, trigger in enumerate(self._trigger_list):
  					self._histograms["TriggerPass"].GetXaxis().SetBinLabel(i+1, trigger)
 
-		elif self._source == Source.kMC:
+		elif self._source == "mc":
 			# JECs are already applied to NanoAOD, so nothing to do
 			pass
 
@@ -57,7 +59,7 @@ class DijetSkimmer(Module):
 			hist.Write()
 
 	def beginFile(self, inputFile, outputFile, inputTree, wrappedOutputTree):
-		if self._source == Source.kDATA:
+		if self._source == "data":
 			# Make a list of triggers that are actually present in the TTree
 			self._trigger_list_file = []
 			for trigger_name in self._trigger_list:
@@ -74,7 +76,7 @@ class DijetSkimmer(Module):
 		self._histograms["ProcessedEvents"].Fill(0)
 
 		# Trigger selection
-		if self._source == Source.kDATA:
+		if self._source == "data":
 			trigger_result = self.getTriggerResult(event)
 			for i, trigger in enumerate(self._trigger_list_file):
 				if trigger_result >> i & 1:
@@ -101,11 +103,3 @@ class DijetSkimmer(Module):
 
 		self._histograms["SelectedEvents"].Fill(0)
 		return True
-
-	def getTriggerResult(self, event):
-		trigger_result = 0
-		for i, trigger in enumerate(self._trigger_list_file):
-			trigger_result |= getattr(event, trigger) << i
-		return trigger_result
-
-

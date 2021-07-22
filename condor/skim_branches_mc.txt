@@ -27,12 +27,7 @@ keep HLT_PFHT*
 keep HLT_AK8PFJet*
 keep HLT_PFJet*
 keep HLT_CaloJet*_NoJetID
-keep HLT_AK8PFJet*
-keep HLT_IsoMu*
-keep HLT_IsoTkMu*
 keep HLT_Mu*
-keep HLT_TkMu*
-keep HLT_OldMu*
 
 keep Gen*
 keep nGen*
@@ -46,7 +41,6 @@ keep nGenDressedLepton
 keep GenDressedLepton*
 keep nGenPart
 keep GenPart*
-keep nGenModel
 keep GenModel*
 
 

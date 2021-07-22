@@ -35,21 +35,24 @@ class DijetSkimmer(Module):
 
 			if self._source == "data":
 				self._trigger_list = []
-				if self._dataset == "JetHT":
+				if "JetHT" in self._dataset :
 					if self._year == "UL2016":
 						self._trigger_list = ["HLT_PFHT900", "HLT_AK8PFJet500", "HLT_AK8PFJet360_TrimMass30", "HLT_CaloJet500_NoJetID", "HLT_AK8PFJet450"]
 					elif self._year == "UL2017" or self._year == "UL2018":
 						self._trigger_list = ["HLT_PFHT1050", "HLT_AK8PFJet500", "HLT_AK8PFJet550", "HLT_CaloJet500_NoJetID", "HLT_CaloJet550_NoJetID", "HLT_PFJet500"]
-				elif self._dataset == "SingleMuon":
+				elif "SingleMuon" in self._dataset:
 					self._trigger_list = ["HLT_Mu50"]
+				else:
+					print("[DijetSkimmer::beginFile] WARNING : Undefined dataset: ", self._dataset)
 					
 				self._histograms["TriggerPass"] = ROOT.TH1D("h_TriggerPass", "h_TriggerPass", len(self._trigger_list), -0.5, len(self._trigger_list) - 0.5)
+				
  				for i, trigger in enumerate(self._trigger_list):
  					self._histograms["TriggerPass"].GetXaxis().SetBinLabel(i+1, trigger)
 
-		elif self._source == "mc":
+			elif self._source == "mc":
 			# JECs are already applied to NanoAOD, so nothing to do
-			pass
+				pass
 
 	def endJob(self):
 		for hist_name in ["ProcessedEvents", "TriggeredEvents", "NJets", "SelectedEvents"]:

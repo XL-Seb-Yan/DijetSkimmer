@@ -6,14 +6,14 @@ print '\nSTART\n'
 # JobDic = {"JetHT_Run2018D_skim_1626872153":["D",1],
          # "SingleMuon_Run2018D_skim_1626872153":["D",3]}
          
-JobDic = {"JetHT_Run2018D_skim_1626872153":["D",1]}
+JobDic = {"JetHT_Run2016H-UL2016_skim_1628149224":["H",2]}
 
 print(JobDic)
          
 for jobName, info in JobDic.items():
    print(jobName)
                
-   year = "UL2018"
+   year = "UL2016"
    sourceType = "data"
    # era = "dummy"
    era = info[0]

@@ -6,7 +6,7 @@ signalMCDir = {
 		"ZprimeTo3Gluon": "/eos/user/x/xuyan/TrijetData/NanoAODs/ZprimeTo3Glu_2016UL"
 	},
 	"UL2017": {
-		"ZprimeTo3Gluon": "/eos/user/x/xuyan/TrijetData/NanoAODs/ZprimeTo3Glu_2017UL"
+		"ZprimeTo3Gluon": "/eos/user/x/xuyan/TrijetData/NanoAODs/ZprimeTo3Gluon_mCutpm0p5_20210810233621"
 	},
 	"UL2018": {
 		"ZprimeTo3Gluon": "/eos/user/x/xuyan/TrijetData/NanoAODs/ZprimeTo3Glu_2018UL"
@@ -100,12 +100,12 @@ if __name__ == "__main__":
 					filelist.write("%s\n" % os.path.join(path, filename))
 			filelist.close()
 		
-		for sample, subsamples in data[year].items():
-			for subsample in subsamples:
-				pdname = subsample.split("/")[1]
-				if("QCD" in sample):
-					samplename = year + "_" + pdname
-				else:
-					pdpostfix = subsample.split("/")[2].split("-")[0]
-					samplename = year + "_" + pdname + "_" + pdpostfix
-				os.system("dasgoclient -query=\"file dataset={}\" 2>&1 | tee {}.txt".format(subsample, samplename))
+		# for sample, subsamples in data[year].items():
+			# for subsample in subsamples:
+				# pdname = subsample.split("/")[1]
+				# if("QCD" in sample):
+					# samplename = year + "_" + pdname
+				# else:
+					# pdpostfix = subsample.split("/")[2].split("_")[0]
+					# samplename = year + "_" + pdname + "_" + pdpostfix
+				# os.system("dasgoclient -query=\"file dataset={}\" 2>&1 | tee {}.txt".format(subsample, samplename))

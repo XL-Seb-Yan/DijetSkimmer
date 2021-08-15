@@ -4,40 +4,49 @@ import os, re, sys, commands, math, time, calendar
 print '\nSTART\n'
 ts = calendar.timegm(time.gmtime())
                
-# for PDName in ["QCD_Pt_300to470_TuneCP5_13TeV_pythia8",
-               # "QCD_Pt_470to600_TuneCP5_13TeV_pythia8",
-               # "QCD_Pt_600to800_TuneCP5_13TeV_pythia8",
-               # "QCD_Pt_800to1000_TuneCP5_13TeV_pythia8",
-               # "QCD_Pt_1000to1400_TuneCP5_13TeV_pythia8",
-               # "QCD_Pt_1400to1800_TuneCP5_13TeV_pythia8"]:
+# PDNameDic = {"QCD_Pt_300to470_TuneCP5_13TeV_pythia8":"",
+            # "QCD_Pt_470to600_TuneCP5_13TeV_pythia8":"",
+            # "QCD_Pt_600to800_TuneCP5_13TeV_pythia8":"",
+            # "QCD_Pt_800to1000_TuneCP5_13TeV_pythia8":"",
+            # "QCD_Pt_1000to1400_TuneCP5_13TeV_pythia8":"",
+            # "QCD_Pt_1400to1800_TuneCP5_13TeV_pythia8":"",
+            # "QCD_Pt_1800to2400_TuneCP5_13TeV_pythia8":"",
+            # "QCD_Pt_2400to3200_TuneCP5_13TeV_pythia8":"",
+            # "QCD_Pt_3200toInf_TuneCP5_13TeV_pythia8":""}
             
-PDNameDic = {"JetHT_Run2018A":"A",
-            "JetHT_Run2018B":"B",
-            "JetHT_Run2018C":"C",
-            "JetHT_Run2018D":"D",
-            "SingleMuon_Run2018A":"A",
-            "SingleMuon_Run2018B":"B",
-            "SingleMuon_Run2018C":"C",
-            "SingleMuon_Run2018D":"D"}
-
-print(PDNameDic)
+# PDNameDic = {"JetHT_Run2016B-ver1":"B",
+            # "JetHT_Run2016B-ver2":"B",
+            # "JetHT_Run2016C-UL2016":"C",
+            # "JetHT_Run2016D-UL2016":"D",
+            # "JetHT_Run2016E-UL2016":"E",
+            # "JetHT_Run2016F-HIPM":"F",
+            # "SingleMuon_Run2016B-ver1":"B",
+            # "SingleMuon_Run2016B-ver2":"B",
+            # "SingleMuon_Run2016C-UL2016":"C",
+            # "SingleMuon_Run2016D-UL2016":"D",
+            # "SingleMuon_Run2016E-UL2016":"E",
+            # "SingleMuon_Run2016F-HIPM":"F",}
+            
+PDNameDic = {"ZprimeTo3Gluon":""}
          
 for PDName, era in PDNameDic.items():
-   print(PDName)
                
    jobName = "{}_skim".format(PDName)
-   year = "UL2018"
-   sourceType = "data"
-   # era = "dummy"
+   year = "UL2017"
+   sourceType = "mc"
+   era = "dummy"
    jobCfg = "run_skimmer.py"
    jobScript = "run_skimmer.sh"
+   
+   print(PDName, year, era, jobCfg, jobScript)
+   
    rel = "CMSSW_10_6_27"
    eosDir = "/eos/user/x/xuyan/TrijetSkim/" + jobName + "_" + str(ts) + "/"
 
    rootDir = os.environ["CMSSW_BASE"] + "/src/PhysicsTools/DijetSkimmer/condor/"
    jobDir = rootDir + jobName + "_" + str(ts) + "/"
    ret = 0
-   files_batch = 1
+   files_batch = 20
 
    fileList = "{}/samples/{}_{}.txt".format(rootDir, year, PDName)
 

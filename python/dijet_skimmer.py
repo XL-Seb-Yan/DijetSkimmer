@@ -36,9 +36,11 @@ class DijetSkimmer(Module):
 			if self._source == "data":
 				self._trigger_list = []
 				if "JetHT" in self._dataset :
-					if self._year == "UL2016":
-						self._trigger_list = ["HLT_PFHT900", "HLT_AK8PFJet500", "HLT_AK8PFJet360_TrimMass30", "HLT_CaloJet500_NoJetID", "HLT_AK8PFJet450"]
-					elif self._year == "UL2017" or self._year == "UL2018":
+					if "UL2016" in self._year:
+						self._trigger_list = ["HLT_PFHT900", "HLT_AK8PFJet500", "HLT_AK8PFJet360_TrimMass30", "HLT_CaloJet500_NoJetID", "HLT_PFJet450",
+						"HLT_PFHT200_DiPFJetAve90_PFAlphaT0p63","HLT_PFHT250_DiPFJetAve90_PFAlphaT0p58","HLT_PFHT300_DiPFJetAve90_PFAlphaT0p54","HLT_PFHT350_DiPFJetAve90_PFAlphaT0p53","HLT_PFHT400_DiPFJetAve90_PFAlphaT0p52",
+						"HLT_PFHT650_WideJetMJJ900DEtaJJ1p5"]
+					elif "UL2017" in self._year or "UL2018" in self._year:
 						self._trigger_list = ["HLT_PFHT1050", "HLT_AK8PFJet500", "HLT_AK8PFJet550", "HLT_CaloJet500_NoJetID", "HLT_CaloJet550_NoJetID", "HLT_PFJet500"]
 				elif "SingleMuon" in self._dataset:
 					self._trigger_list = ["HLT_Mu50"]

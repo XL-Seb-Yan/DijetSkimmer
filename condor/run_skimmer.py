@@ -43,6 +43,19 @@ if args.year is None:
 if args.source == "data" and args.era is None:
     print "ERROR: for data, era must be specified"
     sys.exit(1)
+    
+if args.source == "data":
+    if "16" in args.year:
+        json = "Cert_271036-284044_13TeV_Legacy2016_Collisions16_JSON.txt"
+    elif "17" in args.year:
+        json = "Cert_294927-306462_13TeV_UL2017_Collisions17_GoldenJSON.txt"
+    elif "18" in args.year:
+        json = "Cert_314472-325175_13TeV_Legacy2018_Collisions18_JSON.txt"
+    else:
+        print "ERROR: wrong year, can not load corresponding JSON file"
+        sys.exit(1)
+else:
+    json = None
 
 if args.source == "mc":
     jme_corrector = createJMECorrector(isMC=True, dataYear=args.year, applyHEMfix=("2018" in args.year))  
@@ -61,23 +74,39 @@ print "Printing modules_list:"
 print modules_list
 
 isSig = False
-if "Zprime" in args.dataset:
+if "Zprime" in args.dataset or "Res" in args.dataset:
     isSig = True
 
 filelist = readfiles(isSig, args.ijob)
 print "Files to process:"
 print filelist
 
-skimmer = PostProcessor(outputDir=".",
-    #inputFiles=["root://cmsxrootd.fnal.gov//store/data/Run2017C/JetHT/NANOAOD/Nano14Dec2018-v1/80000/25DF8860-C198-2947-8BCB-60A43CCA34EF.root"],
-    inputFiles=filelist,
-    cut=None,
-    branchsel=branch_list_file,
-    outputbranchsel=branch_list_file,
-    modules=modules_list,
-    provenance=True,
-    fwkJobReport=True,
-    haddFileName=args.haddFileName)
+print "Using json file: "
+print json
+
+if args.source == "data":
+    skimmer = PostProcessor(outputDir=".",
+        #inputFiles=["root://cmsxrootd.fnal.gov//store/data/Run2017C/JetHT/NANOAOD/Nano14Dec2018-v1/80000/25DF8860-C198-2947-8BCB-60A43CCA34EF.root"],
+        inputFiles=filelist,
+        cut=None,
+        branchsel=branch_list_file,
+        outputbranchsel=branch_list_file,
+        modules=modules_list,
+        jsonInput=json,
+        provenance=True,
+        fwkJobReport=True,
+        haddFileName=args.haddFileName)
+else:
+    skimmer = PostProcessor(outputDir=".",
+        #inputFiles=["root://cmsxrootd.fnal.gov//store/data/Run2017C/JetHT/NANOAOD/Nano14Dec2018-v1/80000/25DF8860-C198-2947-8BCB-60A43CCA34EF.root"],
+        inputFiles=filelist,
+        cut=None,
+        branchsel=branch_list_file,
+        outputbranchsel=branch_list_file,
+        modules=modules_list,
+        provenance=True,
+        fwkJobReport=True,
+        haddFileName=args.haddFileName)
 # else:
     # from PhysicsTools.NanoAODTools.postprocessing.framework.crabhelper import inputFiles,runsAndLumis #this takes care of converting the input files from CRAB
     # skimmer = PostProcessor(outputDir=".",
